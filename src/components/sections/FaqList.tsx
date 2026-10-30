@@ -1,4 +1,4 @@
-import { Plus } from "lucide-react";
+import { Plus } from "@/components/ui/icons";
 import { cn } from "@/lib/utils";
 
 /** Accessible FAQ list using native details/summary (works without JavaScript). */

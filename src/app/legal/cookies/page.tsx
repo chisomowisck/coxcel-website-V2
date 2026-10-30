@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/sections/LegalPage";
+import { getAnalyticsConfig } from "@/config/analytics";
 import { site } from "@/config/site";
 import { buildMetadata } from "@/lib/seo";
 
@@ -10,6 +11,41 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function CookiesPage() {
+  const a = getAnalyticsConfig();
+  // Only the tools switched on through environment variables are listed.
+  const tools = [
+    a.gtmId && {
+      name: "Google Tag Manager",
+      provider: "Google",
+      purpose: "Loads and manages our measurement tags.",
+    },
+    a.gaId && {
+      name: "Google Analytics",
+      provider: "Google",
+      purpose: "Counts visits and shows which pages are used, so we can improve the site.",
+    },
+    a.clarityId && {
+      name: "Microsoft Clarity",
+      provider: "Microsoft",
+      purpose: "Heatmaps and anonymised session recordings that show where pages are hard to use.",
+    },
+    a.smartlook && {
+      name: "Smartlook",
+      provider: "Smartlook",
+      purpose: "Anonymised session recordings and funnels that show how visitors use the site.",
+    },
+    a.fbPixelId && {
+      name: "Meta Pixel",
+      provider: "Meta",
+      purpose: "Measures the results of our Facebook and Instagram advertising.",
+    },
+    a.twPixelId && {
+      name: "X Pixel",
+      provider: "X",
+      purpose: "Measures the results of our advertising on X.",
+    },
+  ].filter((t): t is { name: string; provider: string; purpose: string } => Boolean(t));
+
   return (
     <LegalPage
       title="Cookie notice"
@@ -19,27 +55,36 @@ export default function CookiesPage() {
     >
       <h2>Our approach</h2>
       <p>
-        This website is designed to work without tracking cookies. We do not use advertising cookies
-        and we do not currently run analytics that set cookies.
+        The site works fully without optional cookies. Analytics and marketing cookies are only set
+        if you choose &ldquo;Accept cookies&rdquo; in the cookie banner. If you choose
+        &ldquo;Reject&rdquo;, none of the tools below are loaded.
       </p>
 
-      <h2>Essential cookies</h2>
+      <h2>Essential storage</h2>
       <p>
-        Our hosting platform may set strictly necessary cookies to deliver pages securely and
-        protect the site from abuse. These do not identify you personally and cannot be switched off
-        without affecting how the site works.
+        We store your cookie choice in your browser so we do not ask again on every page. Our
+        hosting platform may also set strictly necessary cookies to deliver pages securely and
+        protect the site from abuse. These do not identify you and cannot be switched off without
+        affecting how the site works.
       </p>
 
-      <h2>If this changes</h2>
-      <p>
-        If we add analytics or other non-essential cookies in future, we will update this notice and
-        ask for your consent before setting them.
-      </p>
+      <h2>Optional analytics and marketing tools</h2>
+      {tools.length > 0 ? (
+        <ul>
+          {tools.map((t) => (
+            <li key={t.name}>
+              <strong>{t.name}</strong> ({t.provider}): {t.purpose}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No optional analytics or marketing tools are currently in use.</p>
+      )}
 
-      <h2>Managing cookies</h2>
+      <h2>Changing your choice</h2>
       <p>
-        You can block or delete cookies in your browser settings. Blocking essential cookies may
-        stop parts of the site from working.
+        Use the &ldquo;Cookie settings&rdquo; link at the bottom of any page to change your choice
+        at any time. You can also block or delete cookies in your browser settings.
       </p>
 
       <h2>Contact</h2>

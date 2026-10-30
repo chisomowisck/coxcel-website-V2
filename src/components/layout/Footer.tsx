@@ -4,6 +4,8 @@ import { HexOutline } from "@/components/brand/HexOutline";
 import { Container } from "@/components/ui/Container";
 import { companyNav, legalNav, site } from "@/config/site";
 import { getService, servicesByGroup } from "@/content/services";
+import { CookieSettingsButton } from "@/components/consent/CookieSettingsButton";
+import { getAnalyticsConfig, hasAnyTracker } from "@/config/analytics";
 import { CurrentYear } from "./CurrentYear";
 
 const linkClass = "link-underline text-ink-200 transition-colors hover:text-white";
@@ -52,7 +54,7 @@ export function Footer() {
               <div>
                 <dt className="sr-only">{site.phones.whatsapp.label}</dt>
                 <dd>
-                  <a href={site.phones.whatsapp.href} className={linkClass}>
+                  <a href="/go/whatsapp" className={linkClass}>
                     {site.phones.whatsapp.display}
                   </a>
                   <span className="text-ink-300"> (WhatsApp)</span>
@@ -130,6 +132,11 @@ export function Footer() {
                 </Link>
               </li>
             ))}
+            {hasAnyTracker(getAnalyticsConfig()) ? (
+              <li>
+                <CookieSettingsButton className={linkClass} />
+              </li>
+            ) : null}
           </ul>
         </div>
       </Container>

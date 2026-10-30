@@ -88,10 +88,14 @@ export default function PrivacyPage() {
         may also complain to your local data protection authority.
       </p>
 
-      <h2>Cookies</h2>
+      <h2>Cookies, analytics and advertising measurement</h2>
       <p>
-        This site uses only the essential cookies needed for it to work. See our{" "}
-        <Link href="/legal/cookies">Cookie notice</Link> for details.
+        If you accept cookies, we use analytics and advertising measurement tools (such as Google
+        Analytics, Microsoft Clarity, Smartlook and the Meta and X pixels) to understand how the
+        site is used and to measure our campaigns. These providers process device and usage data,
+        including pages viewed and interactions, under their own privacy terms. If you reject
+        cookies, these tools are not loaded. The <Link href="/legal/cookies">Cookie notice</Link>{" "}
+        lists the tools currently in use and explains how to change your choice.
       </p>
 
       <h2>Changes</h2>

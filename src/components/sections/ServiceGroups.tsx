@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "@/components/ui/icons";
 import { Section } from "@/components/ui/Section";
 import { ServiceIcon } from "@/components/ui/ServiceIcon";
 import { servicesByGroup } from "@/content/services";

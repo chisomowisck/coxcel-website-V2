@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useActionState, useEffect, useRef, startTransition, type FormEvent } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CircleAlert, CircleCheck, LoaderCircle } from "lucide-react";
+import { CircleAlert, CircleCheck, LoaderCircle } from "@/components/ui/icons";
 import { submitContact } from "@/actions/contact";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/config/site";

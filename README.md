@@ -41,6 +41,43 @@ Set these in `.env.local` locally and in Vercel under Project Settings, Environm
 
 Never commit real keys. `.env*` files are git-ignored except `.env.example`.
 
+### Analytics, marketing tags and search verification
+
+All optional. Leave a variable empty to switch that tool off. Values are read at build time, so
+redeploy after changing them.
+
+| Variable                   | Example           | What it turns on                                     |
+| -------------------------- | ----------------- | ---------------------------------------------------- |
+| `GOOGLE_SEO`               | `abc123...`       | Google Search Console `google-site-verification` tag |
+| `GOOGLE_GTM`               | `GTM-XXXXXXX`     | Google Tag Manager                                   |
+| `GA_TRACKING_ID`           | `G-XXXXXXXXXX`    | Google Analytics 4                                   |
+| `FB_PIXEL_ID`              | `123456789012345` | Meta (Facebook) Pixel                                |
+| `TW_PIXEL_ID`              | `o1abc`           | X (Twitter) Pixel                                    |
+| `CLARITY_PROJECT_ID`       | `abcd1234ef`      | Microsoft Clarity                                    |
+| `SMART_LOOK_TRACKING_CODE` | project key       | Smartlook                                            |
+| `SMART_LOOK_REGION`        | `eu` or `us`      | Smartlook data region (default `eu`)                 |
+
+When any tag is set, a cookie banner appears and **no tag loads until the visitor accepts**. A
+"Cookie settings" link in the footer lets visitors change their choice, and the Cookie notice lists
+only the tools that are switched on. If you use GTM to fire GA or the pixels, set only `GOOGLE_GTM`
+to avoid counting visits twice. Code: `src/config/analytics.ts`, `src/components/consent/`.
+
+### Reducing what the site reveals about its technology
+
+Done in code:
+
+- No `X-Powered-By` header, and the Next.js version number and bundler flag are removed from the page.
+- Icons are inline SVGs copied into the project (`src/components/ui/icon-data.ts`), so there are no
+  icon-library class names. Regenerate with `node scripts/vendor-icons.mjs` after adding an icon.
+- The WhatsApp link goes through `/go/whatsapp`, so pages do not link to the chat service directly.
+- The CSS contains no framework banner comment.
+
+Cannot be hidden without rebuilding the site on a different stack: React and Next.js are visible from
+how the page loads (`/_next/` file paths and the page data format), Tailwind from its class names and
+CSS variables, and Vercel from the response headers its platform adds. Open Graph tags and the web
+manifest are kept on purpose: removing them would break link previews and home-screen icons. Placing
+the site behind a proxy such as Cloudflare with header-removal rules can strip the hosting headers.
+
 ## Resend domain verification
 
 1. Create an account at resend.com and add the domain `coxcel.com` under Domains.

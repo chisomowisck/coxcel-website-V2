@@ -1,7 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { ConsentManager } from "@/components/consent/ConsentManager";
+import { Defingerprint } from "@/components/layout/Defingerprint";
 import { Footer } from "@/components/layout/Footer";
+import { getAnalyticsConfig, googleSiteVerification, hasAnyTracker } from "@/config/analytics";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { RevealObserver } from "@/components/reveal/RevealObserver";
@@ -36,6 +39,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   manifest: "/site.webmanifest",
+  ...(googleSiteVerification ? { verification: { google: googleSiteVerification } } : {}),
   openGraph: {
     type: "website",
     siteName: site.name,
@@ -57,6 +61,7 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  const analytics = getAnalyticsConfig();
   return (
     <html lang="en-GB" className={poppins.variable}>
       <body className="flex min-h-dvh flex-col">
@@ -67,6 +72,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <RevealObserver />
+        <Defingerprint />
+        {hasAnyTracker(analytics) ? <ConsentManager config={analytics} /> : null}
         <JsonLd data={organizationJsonLd()} />
       </body>
     </html>

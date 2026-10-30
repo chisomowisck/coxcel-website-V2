@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown } from "@/components/ui/icons";
 import type { ServiceMenu } from "./nav-data";
 import { cn } from "@/lib/utils";
 

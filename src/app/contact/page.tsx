@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, Phone } from "@/components/ui/icons";
 import { IsoGrid } from "@/components/brand/IsoGrid";
 import { LogoMark } from "@/components/brand/LogoMark";
 import { ContactForm } from "@/components/contact/ContactForm";
@@ -66,10 +66,7 @@ export default function ContactPage() {
                   <MessageCircle aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-brand" />
                   <div>
                     <p className="text-sm text-ink-300">{site.phones.whatsapp.label}</p>
-                    <a
-                      href={site.phones.whatsapp.href}
-                      className="link-underline text-lg font-medium"
-                    >
+                    <a href="/go/whatsapp" className="link-underline text-lg font-medium">
                       {site.phones.whatsapp.display}
                     </a>
                   </div>
