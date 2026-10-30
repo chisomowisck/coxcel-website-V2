@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { breadcrumbJsonLd, JsonLd } from "@/lib/jsonld";
 import type { ReactNode } from "react";
 import { HexOutline } from "@/components/brand/HexOutline";
 import { IsoGrid } from "@/components/brand/IsoGrid";
@@ -29,6 +30,7 @@ export function PageHeader({
         <IsoGrid className="opacity-70" />
       </div>
       <HexOutline className="absolute top-1/2 -right-24 hidden w-[520px] -translate-y-1/2 lg:block" />
+      {breadcrumbs ? <JsonLd data={breadcrumbJsonLd(breadcrumbs)} /> : null}
       <Container className="relative pt-14 pb-16 sm:pt-20 sm:pb-24">
         {breadcrumbs ? (
           <nav aria-label="Breadcrumb" className="mb-10">

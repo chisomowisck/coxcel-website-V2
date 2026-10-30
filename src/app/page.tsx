@@ -14,6 +14,7 @@ import { WhyCoxcel } from "@/components/sections/WhyCoxcel";
 import { Section } from "@/components/ui/Section";
 import { site } from "@/config/site";
 import { homeFaqs } from "@/content/faqs";
+import { JsonLd, websiteJsonLd } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -24,6 +25,7 @@ export default function HomePage() {
   const next = () => ++n;
   return (
     <>
+      <JsonLd data={websiteJsonLd()} />
       <Hero />
       <CapabilityStrip />
       <ClientLogos />
