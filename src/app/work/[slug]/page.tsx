@@ -37,7 +37,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
         intro={c.summary}
         breadcrumbs={[
           { label: "Work", href: "/work" },
-          { label: c.sector, href: `/work/${c.slug}` },
+          { label: c.title, href: `/work/${c.slug}` },
         ]}
       >
         <dl className="mt-10 grid grid-cols-1 gap-6 border-t border-mist pt-8 sm:grid-cols-3">
