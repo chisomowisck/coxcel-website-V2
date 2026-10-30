@@ -1,0 +1,53 @@
+Retrieval-augmented generation, usually shortened to RAG, is the most common way organisations put large language models to work on their own information. The idea is simple: instead of relying on what a model learned during training, you retrieve the most relevant passages from your documents and ask the model to answer using only those passages, citing where each part came from.
+
+The idea is simple. Doing it well is not. Here is what we have learned building these systems.
+
+## Why not just train a model on your documents?
+
+Training or fine-tuning teaches a model patterns and style. It is a poor way to teach facts that change, and it gives you no reliable way to show where an answer came from. RAG keeps your documents as the source of truth. Update a policy and the next answer reflects it. Remove a document and it can no longer be cited.
+
+## The parts of a RAG system
+
+A production system has more moving parts than most demos suggest:
+
+1. **Ingestion.** Collect documents from where they live: file shares, SharePoint, a CMS, a ticketing system. Convert them to clean text, including scanned PDFs that need optical character recognition.
+2. **Chunking.** Split long documents into passages small enough to retrieve precisely but large enough to keep their meaning. Headings, tables and numbered clauses need special care.
+3. **Indexing.** Store each passage with an embedding (a numerical representation of its meaning) and metadata such as source, date and who is allowed to see it.
+4. **Retrieval.** For each question, find the most relevant passages. The best results usually combine semantic search with traditional keyword search.
+5. **Generation.** Give the model the question and the retrieved passages, with clear instructions to answer only from them and to cite sources.
+6. **Evaluation and monitoring.** Measure answer quality before launch and keep measuring afterwards.
+
+## Retrieval quality decides answer quality
+
+When a RAG system gives a wrong answer, the cause is usually retrieval, not the language model. If the right passage is not in the context, no model can answer correctly. If irrelevant passages crowd it out, the model may latch onto the wrong one.
+
+Practical improvements that consistently help:
+
+- Keep document structure. A clause number or section heading attached to each chunk improves both retrieval and citations.
+- Use hybrid search so exact terms such as product codes and policy numbers are matched reliably.
+- Re-rank the top results with a second, more precise model before passing them on.
+- Filter by metadata first. If a question is about the 2026 policy, do not retrieve the 2023 version.
+
+## Permissions are not optional
+
+If your documents have access controls, your RAG system must respect them. A support assistant should not quote a confidential HR document because it happened to be in the index. We attach permissions to every passage at ingestion and filter on them at retrieval time, using the identity of the person asking.
+
+## Build an evaluation set before you build the system
+
+Collect fifty to two hundred real questions with known correct answers and the documents that support them. Use this set to compare chunking strategies, retrieval settings and models. Without it, every change is a matter of opinion.
+
+Track at least three measures: whether the right sources were retrieved, whether the answer is correct, and whether every claim in the answer is supported by a cited source. The last one is how you catch a model adding plausible details that are not in your documents.
+
+## Design for "I do not know"
+
+A trustworthy assistant says when it cannot find an answer. Instruct the model to do so, test that it does, and give people a clear next step, such as handing over to a colleague with the conversation attached. An honest "I could not find that in our policies" builds more confidence than a confident guess.
+
+## Costs and performance
+
+Costs come from three places: embedding documents (mostly a one-off), storing the index, and model calls for each question. For most organisations the per-question cost is small, but it is worth setting budgets and alerts from the start, and caching answers to frequent questions.
+
+## Where to start
+
+Pick one well-defined collection of documents and one group of users with a real need, such as a support team answering policy questions. Build the evaluation set, launch to a pilot group, and expand once the numbers are good.
+
+If you would like help, our [document processing and intelligent search](/services/document-processing-intelligent-search) service covers the full path from document inventory to production.

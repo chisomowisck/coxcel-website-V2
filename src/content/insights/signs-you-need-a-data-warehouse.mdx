@@ -1,0 +1,48 @@
+Most organisations start reporting the same way: exports from each system, combined in a spreadsheet, tidied up by someone who knows where the numbers come from. It works until it does not. A data warehouse, a single database designed for analysis and fed automatically from your operational systems, is the usual next step. Here are five signs it is time.
+
+## 1. Month-end reporting depends on one person
+
+If your management report takes days to compile and only one person knows how, you have a capacity problem and a risk. When they are on leave, reporting stops. When they leave, the knowledge goes with them.
+
+A warehouse moves that knowledge into documented, automated transformations. The report refreshes itself, and the logic behind each number is written down where anyone can review it.
+
+## 2. Different teams quote different numbers
+
+Sales says revenue was one figure, finance says another, and both are right according to their own definitions. Meetings start with an argument about whose number is correct instead of a discussion about what to do.
+
+Building a warehouse forces the conversation about definitions to happen once. What counts as a sale? When is a customer "active"? Once agreed, those definitions are encoded and every report uses them.
+
+## 3. You need to combine data from several systems
+
+Questions that cross system boundaries are often the most valuable. Which marketing channels bring the customers with the best margins? Which products lead to the most support tickets? Answering them by hand means matching records across exports, which is slow and error-prone.
+
+A warehouse brings the systems together and maintains the links between them, so cross-system questions become a query instead of a project.
+
+## 4. Reports break whenever a system changes
+
+A new field in the CRM, a renamed column in an export, an upgrade to the ERP: each change can break a chain of spreadsheets in ways nobody notices until a board member asks why a figure looks wrong.
+
+Warehouse pipelines can be tested. When a source changes, a test fails and someone is alerted before the bad number reaches a report.
+
+## 5. You want to do more than look backwards
+
+Forecasting, customer segmentation and machine learning all need clean, consistent historical data. If your history lives in monthly spreadsheets that were each prepared slightly differently, advanced analytics will spend most of its budget on data preparation.
+
+A warehouse keeps history in a consistent shape, which makes the step from reporting to prediction much shorter.
+
+## Start small
+
+A warehouse does not need to be a large programme. A sensible first phase looks like this:
+
+- Pick the one or two reports that cause the most pain.
+- Connect only the systems those reports need.
+- Agree the definitions for the metrics involved.
+- Automate the pipelines, add tests, and rebuild the reports on top.
+
+This typically takes six to ten weeks and delivers something useful on its own. Each later phase adds sources and reports on the same foundation.
+
+## What it costs
+
+Cloud warehouses have made the technology affordable for organisations of almost any size. Running costs for a small to mid-sized business are often modest, and storage is cheap. The larger investment is the initial work to model the data and agree definitions, which is also where most of the value comes from.
+
+If these signs sound familiar, our [data engineering and pipelines](/services/data-engineering-pipelines) and [BI dashboards](/services/data-visualization-bi-dashboards) services are a good place to start.

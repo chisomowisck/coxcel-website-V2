@@ -1,0 +1,8 @@
+.next
+node_modules
+public
+_brand
+.specify
+.claude
+specs
+package-lock.json

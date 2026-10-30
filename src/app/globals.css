@@ -1,0 +1,304 @@
+@import "tailwindcss";
+
+/*
+  Coxcel design tokens. This is the only place brand colour values are defined.
+  Components use the token names (brand, ink, mist, white), never raw values.
+*/
+@theme {
+  --color-*: initial;
+
+  --color-white: #ffffff;
+
+  /* Brand Blue. Accent only: CTAs, highlights, active states, focus, key lines. */
+  --color-brand: #457af4;
+  --color-brand-50: #eef3fe;
+  --color-brand-100: #dce6fd;
+  --color-brand-200: #b9cdfb;
+  --color-brand-300: #8fb0f8; /* small blue text on Ink (7.0:1) */
+  --color-brand-400: #6a94f6;
+  --color-brand-500: #457af4;
+  --color-brand-600: #3366e0; /* button fill with white label (5.1:1) */
+  --color-brand-700: #2a5bd7; /* small blue text on white (5.9:1) */
+  --color-brand-800: #2249b0;
+  --color-brand-900: #1b3a8a;
+
+  /* Ink. Primary text and dark sections. */
+  --color-ink: #25262c;
+  --color-ink-50: #f6f6f7;
+  --color-ink-100: #ededef;
+  --color-ink-200: #d3d4d8;
+  --color-ink-300: #a9aab2; /* muted text on Ink */
+  --color-ink-400: #868791;
+  --color-ink-500: #6e707a;
+  --color-ink-600: #5a5c66; /* muted text on white (6.6:1) */
+  --color-ink-700: #3c3d45;
+  --color-ink-800: #2e2f36;
+  --color-ink-900: #1c1d22;
+
+  /* Mist. Borders, dividers and quiet backgrounds. */
+  --color-mist: #e2e2e2;
+  --color-mist-50: #fafafa;
+  --color-mist-100: #f3f3f3;
+  --color-mist-200: #e2e2e2;
+  --color-mist-300: #cfcfcf;
+
+  /*
+    Logo colour. The supplied logo files use #007BFF; the brand guidelines specify #457AF4.
+    Change this single value to switch every inline logo.
+  */
+  --color-logo: #457af4;
+
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --text-display: clamp(2.75rem, 1.6rem + 5.2vw, 6rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.035em;
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  --animate-rise: rise 7s var(--ease-out-quart) infinite;
+}
+
+@keyframes rise {
+  0%,
+  55%,
+  100% {
+    transform: translate(0, 0);
+  }
+  70% {
+    transform: translate(6px, -6px);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-white);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-brand);
+    color: var(--color-white);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  [id] {
+    scroll-margin-top: 6rem;
+  }
+}
+
+/* Angled corner cut taken from the logo's 30 degree geometry. */
+@utility clip-corner {
+  clip-path: polygon(0 0, calc(100% - 1.5rem) 0, 100% 1.5rem, 100% 100%, 0 100%);
+}
+
+@utility clip-corner-lg {
+  clip-path: polygon(0 0, calc(100% - 3rem) 0, 100% 3rem, 100% 100%, 0 100%);
+}
+
+@utility clip-corner-bl {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 1.5rem 100%, 0 calc(100% - 1.5rem));
+}
+
+@utility clip-hex {
+  clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%);
+}
+
+/* Animated underline for text links. */
+@utility link-underline {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 300ms var(--ease-out-quart);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::after {
+      transition: none;
+    }
+  }
+}
+
+/* Scroll reveal. Content is visible by default; the observer only hides elements below the fold. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-ready [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  [data-reveal] {
+    transition:
+      opacity 600ms var(--ease-out-quart),
+      transform 600ms var(--ease-out-quart);
+  }
+
+  /* Hero assembly: isometric blocks settle into the C once on load. */
+  .hero-block {
+    animation: hero-settle 1.1s var(--ease-out-quart) both;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
+
+  .hero-arrow {
+    animation:
+      hero-settle 1.1s var(--ease-out-quart) both 0.55s,
+      rise 7s var(--ease-out-quart) 2s infinite;
+  }
+
+  .hero-line {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: hero-draw 1.6s var(--ease-out-quart) forwards;
+    animation-delay: calc(0.2s + var(--i, 0) * 120ms);
+  }
+}
+
+@keyframes hero-settle {
+  from {
+    opacity: 0;
+    transform: translate(-14px, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes hero-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Long-form article typography. */
+.prose-coxcel {
+  max-width: 68ch;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--color-ink-700);
+}
+
+.prose-coxcel > * + * {
+  margin-top: 1.25em;
+}
+
+.prose-coxcel h2 {
+  margin-top: 2.25em;
+  font-size: 1.75rem;
+  color: var(--color-ink);
+}
+
+.prose-coxcel h3 {
+  margin-top: 1.75em;
+  font-size: 1.3rem;
+  color: var(--color-ink);
+}
+
+.prose-coxcel a {
+  color: var(--color-brand-700);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-coxcel strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.prose-coxcel ul,
+.prose-coxcel ol {
+  padding-left: 1.25rem;
+}
+
+.prose-coxcel ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.prose-coxcel ul > li {
+  position: relative;
+  padding-left: 1.75rem;
+}
+
+.prose-coxcel ul > li + li,
+.prose-coxcel ol > li + li {
+  margin-top: 0.5em;
+}
+
+.prose-coxcel ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.7rem;
+  height: 0.6rem;
+  background-color: var(--color-brand);
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+}
+
+.prose-coxcel ol {
+  list-style: decimal;
+}
+
+.prose-coxcel blockquote {
+  border-left: 3px solid var(--color-brand);
+  padding-left: 1.25rem;
+  color: var(--color-ink);
+  font-weight: 500;
+}
+
+.prose-coxcel code {
+  font-size: 0.9em;
+  background-color: var(--color-mist-100);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
