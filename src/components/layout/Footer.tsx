@@ -102,10 +102,10 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-            <p className="mt-10 text-xs font-semibold tracking-[0.2em] text-ink-300 uppercase">
+            {/* <p className="mt-10 text-xs font-semibold tracking-[0.2em] text-ink-300 uppercase">
               Follow
-            </p>
-            <ul className="mt-5 space-y-2.5 text-[0.95rem]">
+            </p> */}
+            {/* <ul className="mt-5 space-y-2.5 text-[0.95rem]">
               {site.socials.map((s) => (
                 <li key={s.name}>
                   <a href={s.href} className={linkClass} rel="noopener noreferrer" target="_blank">
@@ -114,7 +114,7 @@ export function Footer() {
                   </a>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </nav>
         </div>
 

@@ -10,25 +10,25 @@ export const site = {
   tagline: "Software, data and AI built to move your business forward.",
   description:
     "Coxcel designs and builds software, data platforms, AI automation and digital growth programmes for organisations that want measurable progress.",
-  foundedYear: 2026, // TODO: confirm founding year (used in the copyright line)
+  foundedYear: 2024, // TODO: confirm founding year (used in the copyright line)
 
   email: "info@coxcel.com",
 
   phones: {
     // TODO: replace with the real main line before launch
-    main: { label: "Main line", display: "+00 00 000 0000", href: "tel:+0000000000" },
+    main: { label: "Main line", display: "+265 999 534173", href: "tel:+265999534173" },
     // TODO: replace with the real WhatsApp / mobile number before launch
     whatsapp: {
       label: "WhatsApp / mobile",
-      display: "+00 00 000 0000",
-      href: "https://wa.me/0000000000",
+      display: "+265 999 534173",
+      href: "https://wa.me/999534173",
     },
   },
 
   // TODO: replace with the real office address
   address: {
-    lines: ["Office address line 1", "City, Postcode", "Country"],
-    mapLabel: "Office location (map placeholder)",
+    lines: ["Chilomoni Fargo", "Blantyre, Malawi"],
+    mapLabel: "Office location (Blantyre Malawi)",
   },
 
   // TODO: confirm business hours and time zone
