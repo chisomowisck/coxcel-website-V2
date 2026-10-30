@@ -66,29 +66,46 @@ export function MegaMenu({ menu }: { menu: ServiceMenu }) {
         Services
         <ChevronDown
           aria-hidden="true"
-          className={cn("size-4 transition-transform duration-200 motion-reduce:transition-none", open && "rotate-180")}
+          className={cn(
+            "size-4 transition-transform duration-200 motion-reduce:transition-none",
+            open && "rotate-180",
+          )}
         />
       </button>
 
-      <div id={panelId} hidden={!open} className="absolute inset-x-0 top-full border-y border-mist-300 bg-white">
+      <div
+        id={panelId}
+        hidden={!open}
+        className="absolute inset-x-0 top-full border-y border-mist-300 bg-white"
+      >
         <div className="mx-auto grid max-w-7xl grid-cols-12 gap-8 px-10 py-10">
           <div className="col-span-3 border-r border-mist pr-8">
-            <p className="text-xs font-semibold tracking-[0.2em] text-ink-600 uppercase">Services</p>
+            <p className="text-xs font-semibold tracking-[0.2em] text-ink-600 uppercase">
+              Services
+            </p>
             <p className="mt-4 text-2xl leading-tight font-semibold tracking-tight">
               Thirty services. One accountable partner.
             </p>
             <p className="mt-3 text-sm text-ink-600">
               From first prototype to production support, grouped into six disciplines.
             </p>
-            <Link href="/services" className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-700">
+            <Link
+              href="/services"
+              className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-700"
+            >
               <span className="link-underline">View all services</span>
-              <ArrowRight aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight
+                aria-hidden="true"
+                className="size-4 transition-transform group-hover:translate-x-1"
+              />
             </Link>
           </div>
           <div className="col-span-9 grid grid-cols-3 gap-x-8 gap-y-8">
             {menu.map((group) => (
               <div key={group.id}>
-                <p className="border-b border-mist pb-2 text-sm font-semibold text-ink">{group.name}</p>
+                <p className="border-b border-mist pb-2 text-sm font-semibold text-ink">
+                  {group.name}
+                </p>
                 <ul className="mt-3 space-y-1.5">
                   {group.items.map((item) => (
                     <li key={item.slug}>

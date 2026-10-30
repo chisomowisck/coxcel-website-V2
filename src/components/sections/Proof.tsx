@@ -14,7 +14,9 @@ export function Testimonials({ n }: { n?: number }) {
         {testimonials.map((t, i) => (
           <figure key={i} className="border-l-2 border-brand pl-6">
             {t.sample ? <SampleBadge className="mb-4" /> : null}
-            <blockquote className="text-xl font-medium tracking-tight">&ldquo;{t.quote}&rdquo;</blockquote>
+            <blockquote className="text-xl font-medium tracking-tight">
+              &ldquo;{t.quote}&rdquo;
+            </blockquote>
             <figcaption className="mt-4 text-sm text-ink-600">
               {t.name}, {t.role}, {t.company}
             </figcaption>
@@ -33,7 +35,7 @@ export function ClientLogos() {
       <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-12 gap-y-6 px-4 sm:px-6 lg:px-10">
         <SampleBadge />
         {clientLogos.map((c) => (
-          <span key={c.name} className="text-lg font-semibold tracking-tight text-ink-400">
+          <span key={c.name} className="text-lg font-semibold tracking-tight text-ink-600">
             {c.name}
           </span>
         ))}

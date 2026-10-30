@@ -22,11 +22,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   return [
-    ...staticPages.map((p) => ({ url: url(p.path), priority: p.priority, changeFrequency: "monthly" as const })),
-    ...services.map((s) => ({ url: url(`/services/${s.slug}`), priority: 0.8, changeFrequency: "monthly" as const })),
+    ...staticPages.map((p) => ({
+      url: url(p.path),
+      priority: p.priority,
+      changeFrequency: "monthly" as const,
+    })),
+    ...services.map((s) => ({
+      url: url(`/services/${s.slug}`),
+      priority: 0.8,
+      changeFrequency: "monthly" as const,
+    })),
     ...(site.features.caseStudies
-      ? caseStudies.map((c) => ({ url: url(`/work/${c.slug}`), priority: 0.6, changeFrequency: "yearly" as const }))
+      ? caseStudies.map((c) => ({
+          url: url(`/work/${c.slug}`),
+          priority: 0.6,
+          changeFrequency: "yearly" as const,
+        }))
       : []),
-    ...articles.map((a) => ({ url: url(`/insights/${a.slug}`), lastModified: a.date, priority: 0.5 })),
+    ...articles.map((a) => ({
+      url: url(`/insights/${a.slug}`),
+      lastModified: a.date,
+      priority: 0.5,
+    })),
   ];
 }

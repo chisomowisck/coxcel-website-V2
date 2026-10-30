@@ -25,7 +25,7 @@ export function SectionIntro({
   aside?: ReactNode;
 }) {
   return (
-    <div className={cn("grid grid-cols-12 gap-x-6 gap-y-6", className)} data-reveal>
+    <div className={cn("grid grid-cols-12 gap-y-6 lg:gap-x-6", className)} data-reveal>
       {n ? (
         <div className="col-span-12 lg:col-span-3">
           <SectionNumber n={n} tone={tone} className="-ml-1" />
@@ -37,10 +37,19 @@ export function SectionIntro({
           {title}
         </Heading>
         {intro ? (
-          <p className={cn("mt-6 max-w-2xl text-lg", tone === "light" ? "text-ink-600" : "text-ink-300")}>{intro}</p>
+          <p
+            className={cn(
+              "mt-6 max-w-2xl text-lg",
+              tone === "light" ? "text-ink-600" : "text-ink-300",
+            )}
+          >
+            {intro}
+          </p>
         ) : null}
       </div>
-      {aside ? <div className="col-span-12 flex items-end lg:col-span-2 lg:justify-end">{aside}</div> : null}
+      {aside ? (
+        <div className="col-span-12 flex items-end lg:col-span-2 lg:justify-end">{aside}</div>
+      ) : null}
     </div>
   );
 }

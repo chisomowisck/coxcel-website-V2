@@ -14,11 +14,18 @@ export function generateStaticParams() {
   return articles.map((a) => ({ slug: a.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/insights/[slug]">): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps<"/insights/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const a = getArticle(slug);
   if (!a) return {};
-  return buildMetadata({ title: a.title, description: a.summary, path: `/insights/${a.slug}`, type: "article" });
+  return buildMetadata({
+    title: a.title,
+    description: a.summary,
+    path: `/insights/${a.slug}`,
+    type: "article",
+  });
 }
 
 export default async function ArticlePage({ params }: PageProps<"/insights/[slug]">) {
@@ -57,13 +64,22 @@ export default async function ArticlePage({ params }: PageProps<"/insights/[slug
             </div>
             <Divider className="mt-16" />
             <nav aria-label="More insights" className="mt-12">
-              <h2 className="text-sm font-semibold tracking-[0.18em] text-ink-600 uppercase">More insights</h2>
+              <h2 className="text-sm font-semibold tracking-[0.18em] text-ink-600 uppercase">
+                More insights
+              </h2>
               <ul className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
                 {others.map((a) => (
                   <li key={a.slug}>
-                    <Link href={`/insights/${a.slug}`} className="group block border-t border-ink pt-4">
-                      <span className="text-lg font-semibold tracking-tight group-hover:text-brand-700">{a.title}</span>
-                      <span className="mt-2 block text-sm text-ink-600">{a.readingMinutes} min read</span>
+                    <Link
+                      href={`/insights/${a.slug}`}
+                      className="group block border-t border-ink pt-4"
+                    >
+                      <span className="text-lg font-semibold tracking-tight group-hover:text-brand-700">
+                        {a.title}
+                      </span>
+                      <span className="mt-2 block text-sm text-ink-600">
+                        {a.readingMinutes} min read
+                      </span>
                     </Link>
                   </li>
                 ))}

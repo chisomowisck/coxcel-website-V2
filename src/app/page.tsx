@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Divider } from "@/components/brand/Divider";
 import { CapabilityStrip } from "@/components/sections/CapabilityStrip";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { FaqList } from "@/components/sections/FaqList";
@@ -32,7 +33,8 @@ export default function HomePage() {
       {site.features.caseStudies ? <SelectedWork n={next()} /> : null}
       <WhyCoxcel n={next()} />
       {site.features.testimonials ? <Testimonials n={next()} /> : null}
-      <Section labelledBy="faq-title" bordered>
+      <Section labelledBy="faq-title">
+        <Divider className="mb-16 lg:mb-20" />
         <div className="grid grid-cols-12 gap-y-10 lg:gap-x-10">
           <SectionIntro
             n={next()}

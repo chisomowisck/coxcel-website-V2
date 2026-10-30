@@ -20,7 +20,9 @@ export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/services/[slug]">): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps<"/services/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const service = getService(slug);
   if (!service) return {};
@@ -28,6 +30,7 @@ export async function generateMetadata({ params }: PageProps<"/services/[slug]">
     title: service.title,
     description: service.summary,
     path: `/services/${service.slug}`,
+    ogImagePath: `/services/${service.slug}/opengraph-image`,
   });
 }
 
@@ -36,7 +39,9 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
   const service = getService(slug);
   if (!service) notFound();
   const group = getGroup(service.group);
-  const related = services.filter((s) => s.group === service.group && s.slug !== service.slug).slice(0, 3);
+  const related = services
+    .filter((s) => s.group === service.group && s.slug !== service.slug)
+    .slice(0, 3);
   const contactHref = `/contact?service=${service.slug}`;
 
   return (
@@ -63,18 +68,21 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
 
       {/* Problems */}
       <section aria-labelledby="problems-title" className="bg-white py-20 lg:py-28">
-        <Container className="grid grid-cols-12 gap-x-6 gap-y-10">
+        <Container className="grid grid-cols-12 gap-y-10 lg:gap-x-6">
           <div className="col-span-12 lg:col-span-4" data-reveal>
             <ServiceIcon name={service.icon} className="size-10 text-brand" />
             <Eyebrow className="mt-8">The problem</Eyebrow>
-            <h2 id="problems-title" className="mt-4 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
+            <h2
+              id="problems-title"
+              className="mt-4 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl"
+            >
               Signs you need this
             </h2>
           </div>
           <ul className="col-span-12 grid grid-cols-1 gap-px bg-mist sm:grid-cols-2 lg:col-span-8">
             {service.problems.map((p, i) => (
               <li key={p} data-reveal className="bg-white p-6 sm:p-8">
-                <span className="text-sm font-semibold text-ink-400">{pad(i + 1)}</span>
+                <span className="text-sm font-semibold text-ink-600">{pad(i + 1)}</span>
                 <p className="mt-3 text-lg font-medium tracking-tight">{p}</p>
               </li>
             ))}
@@ -83,14 +91,23 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
       </section>
 
       {/* Deliverables */}
-      <section id="included" aria-labelledby="included-title" className="bg-mist-100 py-20 lg:py-28">
-        <Container className="grid grid-cols-12 gap-x-6 gap-y-10">
+      <section
+        id="included"
+        aria-labelledby="included-title"
+        className="bg-mist-100 py-20 lg:py-28"
+      >
+        <Container className="grid grid-cols-12 gap-y-10 lg:gap-x-6">
           <div className="col-span-12 lg:col-span-4" data-reveal>
             <Eyebrow>Deliverables</Eyebrow>
-            <h2 id="included-title" className="mt-4 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
+            <h2
+              id="included-title"
+              className="mt-4 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl"
+            >
               What is included
             </h2>
-            <p className="mt-4 text-ink-600">Scope is confirmed during discovery. A typical engagement includes:</p>
+            <p className="mt-4 text-ink-600">
+              Scope is confirmed during discovery. A typical engagement includes:
+            </p>
           </div>
           <ul className="col-span-12 grid grid-cols-1 gap-x-10 gap-y-5 sm:grid-cols-2 lg:col-span-8">
             {service.deliverables.map((d) => (
@@ -108,7 +125,10 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
         <Container>
           <div data-reveal>
             <Eyebrow tone="dark">How we deliver</Eyebrow>
-            <h2 id="delivery-title" className="mt-4 max-w-3xl text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
+            <h2
+              id="delivery-title"
+              className="mt-4 max-w-3xl text-3xl font-semibold tracking-[-0.03em] sm:text-4xl"
+            >
               A clear path from first conversation to results
             </h2>
           </div>
@@ -126,7 +146,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
 
       {/* Technologies + FAQs */}
       <section aria-labelledby="faq-title" className="bg-white py-20 lg:py-28">
-        <Container className="grid grid-cols-12 gap-x-10 gap-y-14">
+        <Container className="grid grid-cols-12 gap-y-14 lg:gap-x-10">
           <div className="col-span-12 lg:col-span-4" data-reveal>
             <Eyebrow>Typical technologies</Eyebrow>
             <ul className="mt-6 flex flex-wrap gap-2" aria-label="Typical technologies">
@@ -142,7 +162,10 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
           </div>
           <div className="col-span-12 lg:col-span-8">
             <Eyebrow>Questions</Eyebrow>
-            <h2 id="faq-title" className="mt-4 mb-8 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
+            <h2
+              id="faq-title"
+              className="mt-4 mb-8 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl"
+            >
               Frequently asked questions
             </h2>
             <FaqList items={service.faqs} />
@@ -177,7 +200,11 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
         </section>
       ) : null}
 
-      <CtaBand title={`Ready to talk about ${service.title}?`} href={contactHref} label="Discuss this service" />
+      <CtaBand
+        title={`Ready to talk about ${service.title}?`}
+        href={contactHref}
+        label="Discuss this service"
+      />
     </>
   );
 }

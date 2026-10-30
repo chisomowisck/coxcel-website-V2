@@ -48,7 +48,8 @@
   */
   --color-logo: #457af4;
 
-  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-sans:
+    var(--font-poppins), ui-sans-serif, system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
 
   --text-display: clamp(2.75rem, 1.6rem + 5.2vw, 6rem);
   --text-display--line-height: 1.02;

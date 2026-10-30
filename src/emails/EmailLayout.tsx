@@ -1,4 +1,14 @@
-import { Body, Container, Head, Hr, Html, Img, Preview, Section, Text } from "@react-email/components";
+import {
+  Body,
+  Container,
+  Head,
+  Hr,
+  Html,
+  Img,
+  Preview,
+  Section,
+  Text,
+} from "@react-email/components";
 import type { ReactNode } from "react";
 import { site } from "@/config/site";
 import { emailFont, emailStyles as s } from "./theme";

@@ -34,7 +34,11 @@ export function Card({
     </>
   );
 
-  const classes = cn("group relative flex h-full flex-col p-6 clip-corner sm:p-8", toneClass, className);
+  const classes = cn(
+    "group relative flex h-full flex-col p-6 clip-corner sm:p-8",
+    toneClass,
+    className,
+  );
 
   if (href) {
     return (

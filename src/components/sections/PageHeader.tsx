@@ -22,7 +22,10 @@ export function PageHeader({
 }) {
   return (
     <section className="relative overflow-hidden border-b border-mist bg-white">
-      <div aria-hidden="true" className="absolute inset-y-0 right-0 hidden w-1/2 border-l border-mist lg:block">
+      <div
+        aria-hidden="true"
+        className="absolute inset-y-0 right-0 hidden w-1/2 border-l border-mist lg:block"
+      >
         <IsoGrid className="opacity-70" />
       </div>
       <HexOutline className="absolute top-1/2 -right-24 hidden w-[520px] -translate-y-1/2 lg:block" />

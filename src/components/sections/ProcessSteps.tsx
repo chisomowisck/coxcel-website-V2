@@ -15,11 +15,22 @@ export function ProcessSteps({ n, showLink = true }: { n?: number; showLink?: bo
         eyebrow="How we work"
         title="Discover, Design, Build, Launch, Grow."
         intro="A simple, repeatable process with something tangible at the end of every phase, so you always know where the work stands."
-        aside={showLink ? <TextLink href="/process" tone="dark" arrow>Our process</TextLink> : undefined}
+        aside={
+          showLink ? (
+            <TextLink href="/process" tone="dark" arrow>
+              Our process
+            </TextLink>
+          ) : undefined
+        }
       />
       <ol className="mt-16 grid grid-cols-1 gap-px bg-ink-700 sm:grid-cols-2 lg:grid-cols-5">
         {phases.map((p, i) => (
-          <li key={p.title} data-reveal className="relative flex flex-col bg-ink p-6 lg:pt-8" style={{ transitionDelay: `${i * 70}ms` }}>
+          <li
+            key={p.title}
+            data-reveal
+            className="relative flex flex-col bg-ink p-6 lg:pt-8"
+            style={{ transitionDelay: `${i * 70}ms` }}
+          >
             {/* stepped rise: each phase sits a little higher, echoing the logo arrow */}
             <div aria-hidden="true" className="mb-6 hidden h-24 items-end lg:flex">
               <span className="block w-full bg-ink-700" style={{ height: `${20 + i * 18}%` }}>

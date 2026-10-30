@@ -24,13 +24,15 @@ export function ServiceGroups({ n = 1 }: { n?: number }) {
             className="group relative flex flex-col border-r border-b border-mist p-6 transition-colors duration-300 hover:bg-mist-100 sm:p-8"
           >
             <div className="flex items-start justify-between">
-              <span className="text-sm font-semibold text-ink-400">{pad(i + 1)}</span>
+              <span className="text-sm font-semibold text-ink-600">{pad(i + 1)}</span>
               <ServiceIcon
                 name={group.services[0].icon}
                 className="size-7 text-brand transition-transform duration-300 group-hover:-translate-y-1 group-hover:rotate-6 motion-reduce:transition-none"
               />
             </div>
-            <p className="mt-8 text-xs font-semibold tracking-[0.2em] text-brand-700 uppercase">{group.label}</p>
+            <p className="mt-8 text-xs font-semibold tracking-[0.2em] text-brand-700 uppercase">
+              {group.label}
+            </p>
             <h3 className="mt-2 text-2xl font-semibold tracking-tight">
               <Link href={`/services#${group.id}`} className="after:absolute after:inset-0">
                 {group.title}
@@ -40,7 +42,10 @@ export function ServiceGroups({ n = 1 }: { n?: number }) {
             <ul className="mt-6 space-y-1.5 text-sm text-ink-700">
               {group.services.slice(0, 4).map((s) => (
                 <li key={s.slug} className="flex gap-2.5">
-                  <span aria-hidden="true" className="mt-[0.55em] h-1.5 w-2 shrink-0 bg-ink-300 clip-hex" />
+                  <span
+                    aria-hidden="true"
+                    className="mt-[0.55em] h-1.5 w-2 shrink-0 bg-ink-300 clip-hex"
+                  />
                   {s.title}
                 </li>
               ))}

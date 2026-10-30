@@ -8,8 +8,14 @@ import { serviceGroups } from "@/content/services";
 
 export function Hero() {
   return (
-    <section aria-labelledby="hero-title" className="relative overflow-hidden border-b border-mist bg-white">
-      <div aria-hidden="true" className="absolute inset-y-0 right-0 w-full lg:w-[46%] lg:border-l lg:border-mist">
+    <section
+      aria-labelledby="hero-title"
+      className="relative overflow-hidden border-b border-mist bg-white"
+    >
+      <div
+        aria-hidden="true"
+        className="absolute inset-y-0 right-0 w-full lg:w-[46%] lg:border-l lg:border-mist"
+      >
         <IsoGrid cell={56} className="opacity-80" />
       </div>
       <Container className="relative">
@@ -20,8 +26,8 @@ export function Hero() {
               We transform your vision into reality with <Accent>innovative ICT solutions.</Accent>
             </h1>
             <p className="mt-8 max-w-xl text-lg text-ink-600 sm:text-xl">
-              Coxcel designs, builds and runs the software, data platforms and AI automation that help
-              organisations work better and grow with confidence.
+              Coxcel designs, builds and runs the software, data platforms and AI automation that
+              help organisations work better and grow with confidence.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
               <ButtonLink href="/contact" size="lg">
@@ -45,8 +51,13 @@ export function Hero() {
                 key={g.id}
                 className="border-mist py-5 pr-4 text-sm odd:border-r sm:border-r sm:pl-0 lg:[&:nth-child(6)]:border-r-0"
               >
-                <span className="mr-2 font-semibold text-ink-400">{String(i + 1).padStart(2, "0")}</span>
-                <a href={`/services#${g.id}`} className="link-underline font-medium text-ink hover:text-brand-700">
+                <span className="mr-2 font-semibold text-ink-600">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <a
+                  href={`/services#${g.id}`}
+                  className="link-underline font-medium text-ink hover:text-brand-700"
+                >
                   {g.label}
                 </a>
                 <span className="block text-ink-600">{g.title}</span>

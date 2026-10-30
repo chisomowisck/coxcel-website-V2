@@ -39,16 +39,37 @@ export default function ProcessPage() {
       <ProcessSteps n={1} showLink={false} />
 
       <Section labelledBy="phases-title">
-        <SectionIntro n={2} id="phases-title" eyebrow="In detail" title="What each phase produces." />
+        <SectionIntro
+          n={2}
+          id="phases-title"
+          eyebrow="In detail"
+          title="What each phase produces."
+        />
         <div className="mt-14 border-t border-mist">
           {phases.map((p, i) => (
-            <div key={p.title} className="grid grid-cols-12 gap-x-6 gap-y-4 border-b border-mist py-8" data-reveal>
-              <span className="col-span-2 text-3xl font-semibold tracking-[-0.04em] text-mist-300 sm:text-4xl lg:col-span-1">{pad(i + 1)}</span>
-              <h3 className="col-span-10 text-2xl font-semibold tracking-tight lg:col-span-3">{p.title}</h3>
+            <div
+              key={p.title}
+              className="grid grid-cols-12 gap-y-4 border-b border-mist py-8 lg:gap-x-6"
+              data-reveal
+            >
+              <span
+                aria-hidden="true"
+                data-num={pad(i + 1)}
+                className="col-span-2 text-3xl font-semibold tracking-[-0.04em] text-mist-300 before:content-[attr(data-num)] sm:text-4xl lg:col-span-1"
+              />
+              <h3 className="col-span-10 text-2xl font-semibold tracking-tight lg:col-span-3">
+                {p.title}
+              </h3>
               <p className="col-span-12 text-ink-600 lg:col-span-5">{p.text}</p>
-              <ul className="col-span-12 flex flex-wrap gap-2 lg:col-span-3 lg:justify-end" aria-label={`${p.title} outputs`}>
+              <ul
+                className="col-span-12 flex flex-wrap gap-2 lg:col-span-3 lg:justify-end"
+                aria-label={`${p.title} outputs`}
+              >
                 {p.outputs.map((o) => (
-                  <li key={o} className="border border-mist-300 px-2.5 py-1 text-xs font-medium text-ink-700">
+                  <li
+                    key={o}
+                    className="border border-mist-300 px-2.5 py-1 text-xs font-medium text-ink-700"
+                  >
                     {o}
                   </li>
                 ))}
@@ -68,7 +89,12 @@ export default function ProcessPage() {
         />
         <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-3">
           {engagementModels.map((m, i) => (
-            <article key={m.slug} id={m.slug} className="flex flex-col bg-white p-8 ring-1 ring-mist ring-inset clip-corner-lg" data-reveal>
+            <article
+              key={m.slug}
+              id={m.slug}
+              className="flex flex-col bg-white p-8 ring-1 ring-mist clip-corner-lg ring-inset"
+              data-reveal
+            >
               <span className="text-sm font-semibold text-brand-700">{pad(i + 1)}</span>
               <h3 className="mt-3 text-2xl font-semibold tracking-tight">{m.title}</h3>
               <p className="mt-3 text-ink-600">
@@ -99,7 +125,12 @@ export default function ProcessPage() {
       </Section>
 
       <Section labelledBy="commit-title">
-        <SectionIntro n={4} id="commit-title" eyebrow="Our commitments" title="What you can expect in every model." />
+        <SectionIntro
+          n={4}
+          id="commit-title"
+          eyebrow="Our commitments"
+          title="What you can expect in every model."
+        />
         <ul className="mt-12 grid grid-cols-1 gap-x-10 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
           {commitments.map((c) => (
             <li key={c} className="flex gap-3 border-b border-mist pb-5 text-lg" data-reveal>
@@ -110,7 +141,10 @@ export default function ProcessPage() {
         </ul>
       </Section>
 
-      <CtaBand title="Not sure which model fits?" text="Tell us about the work and your constraints. We will recommend a model and explain the trade-offs." />
+      <CtaBand
+        title="Not sure which model fits?"
+        text="Tell us about the work and your constraints. We will recommend a model and explain the trade-offs."
+      />
     </>
   );
 }

@@ -14,7 +14,10 @@ export function IsoGrid({
   const id = useId().replace(/:/g, "");
   const h = cell * Math.tan(Math.PI / 6); // tile height so diagonals run at 30 degrees
   return (
-    <svg aria-hidden="true" className={cn("pointer-events-none absolute inset-0 h-full w-full", className)}>
+    <svg
+      aria-hidden="true"
+      className={cn("pointer-events-none absolute inset-0 h-full w-full", className)}
+    >
       <defs>
         <pattern id={`iso-${id}`} width={cell} height={h} patternUnits="userSpaceOnUse">
           <path

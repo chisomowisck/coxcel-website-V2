@@ -4,7 +4,13 @@ import { CodeWindowMock } from "./CodeWindowMock";
 import { DashboardMock } from "./DashboardMock";
 import { PipelineDiagram } from "./PipelineDiagram";
 
-export function CaseVisual({ visual, className }: { visual: CaseStudy["visual"]; className?: string }) {
+export function CaseVisual({
+  visual,
+  className,
+}: {
+  visual: CaseStudy["visual"];
+  className?: string;
+}) {
   switch (visual) {
     case "dashboard":
       return <DashboardMock className={className} />;
@@ -13,7 +19,7 @@ export function CaseVisual({ visual, className }: { visual: CaseStudy["visual"];
     case "pipeline":
       return (
         <div className={className}>
-          <div className="bg-white p-4 ring-1 ring-mist ring-inset clip-corner-lg">
+          <div className="bg-white p-4 ring-1 ring-mist clip-corner-lg ring-inset">
             <PipelineDiagram />
           </div>
         </div>

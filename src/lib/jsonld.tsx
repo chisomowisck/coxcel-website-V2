@@ -37,7 +37,13 @@ export function serviceJsonLd(service: Service) {
   };
 }
 
-export function articleJsonLd(a: { title: string; summary: string; date: string; author: string; slug: string }) {
+export function articleJsonLd(a: {
+  title: string;
+  summary: string;
+  date: string;
+  author: string;
+  slug: string;
+}) {
   return {
     "@context": "https://schema.org",
     "@type": "Article",

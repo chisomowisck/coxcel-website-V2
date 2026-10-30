@@ -24,7 +24,10 @@ export default function InsightsPage() {
       />
       <section aria-label="Articles" className="bg-white py-20 lg:py-28">
         <Container>
-          <article className="group grid grid-cols-12 gap-x-10 gap-y-6 border-b border-mist pb-16" data-reveal>
+          <article
+            className="group grid grid-cols-12 gap-y-6 border-b border-mist pb-16 lg:gap-x-10"
+            data-reveal
+          >
             <div className="col-span-12 lg:col-span-7">
               <p className="flex flex-wrap gap-x-3 text-sm text-ink-600">
                 <time dateTime={lead.date}>{formatDate(lead.date)}</time>
@@ -51,7 +54,11 @@ export default function InsightsPage() {
             {rest.map((a, i) => (
               <li key={a.slug} className="border-b border-mist py-12" data-reveal>
                 <article className="group">
-                  <span aria-hidden="true" className="text-4xl font-semibold tracking-[-0.04em] text-mist-300">{pad(i + 2)}</span>
+                  <span
+                    aria-hidden="true"
+                    data-num={pad(i + 2)}
+                    className="text-4xl font-semibold tracking-[-0.04em] text-mist-300 before:content-[attr(data-num)]"
+                  />
                   <p className="mt-4 flex flex-wrap gap-x-3 text-sm text-ink-600">
                     <time dateTime={a.date}>{formatDate(a.date)}</time>
                     <span aria-hidden="true">/</span>

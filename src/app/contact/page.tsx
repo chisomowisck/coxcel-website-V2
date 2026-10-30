@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { IsoGrid } from "@/components/brand/IsoGrid";
 import { LogoMark } from "@/components/brand/LogoMark";
@@ -7,7 +6,7 @@ import { ContactForm } from "@/components/contact/ContactForm";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { site } from "@/config/site";
-import { serviceOptions, serviceSlugs } from "@/content/services";
+import { serviceOptions } from "@/content/services";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -16,15 +15,7 @@ export const metadata: Metadata = buildMetadata({
   path: "/contact",
 });
 
-/** Reads ?service= to preselect a service. Runs at request time inside Suspense. */
-async function PreselectedForm({ searchParams }: { searchParams: PageProps<"/contact">["searchParams"] }) {
-  const params = await searchParams;
-  const raw = typeof params.service === "string" ? params.service : "";
-  const defaultService = raw === "other" || serviceSlugs.includes(raw) ? raw : "";
-  return <ContactForm serviceOptions={serviceOptions} defaultService={defaultService} />;
-}
-
-export default function ContactPage({ searchParams }: PageProps<"/contact">) {
+export default function ContactPage() {
   return (
     <>
       <PageHeader
@@ -39,9 +30,8 @@ export default function ContactPage({ searchParams }: PageProps<"/contact">) {
           <div className="col-span-12 lg:col-span-7">
             <h2 className="text-2xl font-semibold tracking-tight">Send us a message</h2>
             <div className="mt-8">
-              <Suspense fallback={<ContactForm serviceOptions={serviceOptions} />}>
-                <PreselectedForm searchParams={searchParams} />
-              </Suspense>
+              {/* The form preselects a service from ?service= on the client. */}
+              <ContactForm serviceOptions={serviceOptions} />
             </div>
           </div>
 
@@ -55,7 +45,10 @@ export default function ContactPage({ searchParams }: PageProps<"/contact">) {
                   <Mail aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-brand" />
                   <div>
                     <p className="text-sm text-ink-300">Email</p>
-                    <a href={`mailto:${site.email}`} className="link-underline text-lg font-medium text-brand-300">
+                    <a
+                      href={`mailto:${site.email}`}
+                      className="link-underline text-lg font-medium text-brand-300"
+                    >
                       {site.email}
                     </a>
                   </div>
@@ -73,7 +66,10 @@ export default function ContactPage({ searchParams }: PageProps<"/contact">) {
                   <MessageCircle aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-brand" />
                   <div>
                     <p className="text-sm text-ink-300">{site.phones.whatsapp.label}</p>
-                    <a href={site.phones.whatsapp.href} className="link-underline text-lg font-medium">
+                    <a
+                      href={site.phones.whatsapp.href}
+                      className="link-underline text-lg font-medium"
+                    >
                       {site.phones.whatsapp.display}
                     </a>
                   </div>
@@ -117,7 +113,9 @@ export default function ContactPage({ searchParams }: PageProps<"/contact">) {
               <IsoGrid cell={40} />
               <div className="relative flex flex-col items-center gap-3">
                 <LogoMark className="h-12 w-auto" />
-                <span className="bg-white px-3 py-1 text-sm font-medium text-ink-700 ring-1 ring-mist">Map placeholder</span>
+                <span className="bg-white px-3 py-1 text-sm font-medium text-ink-700 ring-1 ring-mist">
+                  Map placeholder
+                </span>
               </div>
             </div>
           </aside>

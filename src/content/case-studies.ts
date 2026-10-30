@@ -25,7 +25,8 @@ export const caseStudies: CaseStudy[] = [
     client: "Sample client: regional distributor",
     sector: "Retail & E-commerce",
     services: ["data-engineering-pipelines", "data-visualization-bi-dashboards"],
-    summary: "Replacing a weekly spreadsheet exercise with automated dashboards that sales and finance both trust.",
+    summary:
+      "Replacing a weekly spreadsheet exercise with automated dashboards that sales and finance both trust.",
     challenge:
       "Sales, stock and credit data lived in an ERP, two spreadsheets and a delivery app. Compiling the weekly report took two people most of a day, and figures rarely matched finance.",
     approach: [
@@ -48,7 +49,11 @@ export const caseStudies: CaseStudy[] = [
     title: "Online booking and reminders for a network of clinics",
     client: "Sample client: clinic network",
     sector: "Healthcare",
-    services: ["web-application-development", "mobile-app-development", "workflow-business-process-automation"],
+    services: [
+      "web-application-development",
+      "mobile-app-development",
+      "workflow-business-process-automation",
+    ],
     summary: "A booking platform and staff app that reduces phone queues and missed appointments.",
     challenge:
       "Patients could only book by phone during opening hours. Reception staff were overwhelmed and missed appointments were common because reminders were sent by hand.",
@@ -72,8 +77,13 @@ export const caseStudies: CaseStudy[] = [
     title: "Automated document checks for a lending business",
     client: "Sample client: lending business",
     sector: "Finance",
-    services: ["document-processing-intelligent-search", "ai-integration", "workflow-business-process-automation"],
-    summary: "Extracting and checking applicant documents so credit officers focus on decisions, not data entry.",
+    services: [
+      "document-processing-intelligent-search",
+      "ai-integration",
+      "workflow-business-process-automation",
+    ],
+    summary:
+      "Extracting and checking applicant documents so credit officers focus on decisions, not data entry.",
     challenge:
       "Loan applications arrived with scanned IDs, payslips and bank statements. Officers typed key fields by hand and applications queued for days.",
     approach: [
@@ -97,7 +107,8 @@ export const caseStudies: CaseStudy[] = [
     client: "Sample client: training provider",
     sector: "Education",
     services: ["ai-agents-chatbots", "document-processing-intelligent-search"],
-    summary: "Answering learner questions from course policies, with citations and a clean hand-over to staff.",
+    summary:
+      "Answering learner questions from course policies, with citations and a clean hand-over to staff.",
     challenge:
       "The support inbox received hundreds of similar questions about enrolment, fees and certificates each week, and answers varied by staff member.",
     approach: [

@@ -32,7 +32,10 @@ export function Footer() {
               <div>
                 <dt className="sr-only">Email</dt>
                 <dd>
-                  <a href={`mailto:${site.email}`} className="link-underline font-medium text-brand-300">
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="link-underline font-medium text-brand-300"
+                  >
                     {site.email}
                   </a>
                 </dd>
@@ -63,7 +66,9 @@ export function Footer() {
           </div>
 
           <nav aria-label="Services" className="col-span-12 sm:col-span-8 lg:col-span-5">
-            <p className="text-xs font-semibold tracking-[0.2em] text-ink-300 uppercase">Services</p>
+            <p className="text-xs font-semibold tracking-[0.2em] text-ink-300 uppercase">
+              Services
+            </p>
             <div className="mt-5 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2">
               <ul className="space-y-2.5 text-[0.95rem]">
                 {servicesByGroup.map((g) => (
@@ -97,7 +102,9 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-            <p className="mt-10 text-xs font-semibold tracking-[0.2em] text-ink-300 uppercase">Follow</p>
+            <p className="mt-10 text-xs font-semibold tracking-[0.2em] text-ink-300 uppercase">
+              Follow
+            </p>
             <ul className="mt-5 space-y-2.5 text-[0.95rem]">
               {site.socials.map((s) => (
                 <li key={s.name}>

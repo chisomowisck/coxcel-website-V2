@@ -29,7 +29,8 @@ export const engagementModels = [
   {
     slug: "retainer",
     title: "Retainer",
-    bestFor: "Ongoing support, maintenance, marketing or advisory work with a predictable monthly budget.",
+    bestFor:
+      "Ongoing support, maintenance, marketing or advisory work with a predictable monthly budget.",
     how: [
       "A monthly allowance of hours or deliverables",
       "Agreed service levels for support requests",

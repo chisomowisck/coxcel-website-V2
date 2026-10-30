@@ -49,7 +49,12 @@ export function MobileNav({ menu }: { menu: ServiceMenu }) {
         <div className="flex h-full flex-col">
           <div className="flex h-18 items-center justify-between border-b border-mist px-4 sm:px-6">
             <Logo />
-            <button type="button" onClick={close} className="inline-flex size-11 items-center justify-center" autoFocus>
+            <button
+              type="button"
+              onClick={close}
+              className="inline-flex size-11 items-center justify-center"
+              autoFocus
+            >
               <X aria-hidden="true" className="size-6" />
               <span className="sr-only">Close menu</span>
             </button>
@@ -59,7 +64,10 @@ export function MobileNav({ menu }: { menu: ServiceMenu }) {
             <details className="group border-b border-mist">
               <summary className="flex cursor-pointer list-none items-center justify-between py-5 text-2xl font-semibold tracking-tight [&::-webkit-details-marker]:hidden">
                 Services
-                <Plus aria-hidden="true" className="size-5 transition-transform group-open:rotate-45 motion-reduce:transition-none" />
+                <Plus
+                  aria-hidden="true"
+                  className="size-5 transition-transform group-open:rotate-45 motion-reduce:transition-none"
+                />
               </summary>
               <div className="space-y-6 pb-6">
                 <Link href="/services" className="block text-base font-semibold text-brand-700">
@@ -67,11 +75,16 @@ export function MobileNav({ menu }: { menu: ServiceMenu }) {
                 </Link>
                 {menu.map((group) => (
                   <div key={group.id}>
-                    <p className="text-xs font-semibold tracking-[0.18em] text-ink-600 uppercase">{group.name}</p>
+                    <p className="text-xs font-semibold tracking-[0.18em] text-ink-600 uppercase">
+                      {group.name}
+                    </p>
                     <ul className="mt-2 space-y-1">
                       {group.items.map((item) => (
                         <li key={item.slug}>
-                          <Link href={`/services/${item.slug}`} className="block py-1.5 text-[0.95rem] text-ink-700">
+                          <Link
+                            href={`/services/${item.slug}`}
+                            className="block py-1.5 text-[0.95rem] text-ink-700"
+                          >
                             {item.title}
                           </Link>
                         </li>

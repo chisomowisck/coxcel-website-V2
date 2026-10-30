@@ -56,7 +56,11 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             <dt className="text-sm text-ink-600">Services</dt>
             <dd className="mt-1 space-y-1">
               {c.services.map((slug) => (
-                <Link key={slug} href={`/services/${slug}`} className="block font-medium text-brand-700 hover:underline">
+                <Link
+                  key={slug}
+                  href={`/services/${slug}`}
+                  className="block font-medium text-brand-700 hover:underline"
+                >
                   {getService(slug)?.title}
                 </Link>
               ))}
@@ -74,18 +78,30 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
       </section>
 
       <article className="bg-white py-20 lg:py-28">
-        <Container className="grid grid-cols-12 gap-x-10 gap-y-16">
-          <section aria-labelledby="challenge-title" className="col-span-12 grid grid-cols-12 gap-x-10 gap-y-6" data-reveal>
+        <Container className="grid grid-cols-12 gap-y-16 lg:gap-x-10">
+          <section
+            aria-labelledby="challenge-title"
+            className="col-span-12 grid grid-cols-12 gap-y-6 lg:gap-x-10"
+            data-reveal
+          >
             <div className="col-span-12 lg:col-span-4">
               <Eyebrow>01</Eyebrow>
-              <h2 id="challenge-title" className="mt-4 text-3xl font-semibold tracking-[-0.03em]">The challenge</h2>
+              <h2 id="challenge-title" className="mt-4 text-3xl font-semibold tracking-[-0.03em]">
+                The challenge
+              </h2>
             </div>
             <p className="col-span-12 text-lg text-ink-700 lg:col-span-8">{c.challenge}</p>
           </section>
-          <section aria-labelledby="approach-title" className="col-span-12 grid grid-cols-12 gap-x-10 gap-y-6 border-t border-mist pt-16" data-reveal>
+          <section
+            aria-labelledby="approach-title"
+            className="col-span-12 grid grid-cols-12 gap-y-6 border-t border-mist pt-16 lg:gap-x-10"
+            data-reveal
+          >
             <div className="col-span-12 lg:col-span-4">
               <Eyebrow>02</Eyebrow>
-              <h2 id="approach-title" className="mt-4 text-3xl font-semibold tracking-[-0.03em]">Our approach</h2>
+              <h2 id="approach-title" className="mt-4 text-3xl font-semibold tracking-[-0.03em]">
+                Our approach
+              </h2>
             </div>
             <ol className="col-span-12 space-y-4 lg:col-span-8">
               {c.approach.map((a) => (
@@ -96,10 +112,16 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
               ))}
             </ol>
           </section>
-          <section aria-labelledby="outcome-title" className="col-span-12 grid grid-cols-12 gap-x-10 gap-y-6 border-t border-mist pt-16" data-reveal>
+          <section
+            aria-labelledby="outcome-title"
+            className="col-span-12 grid grid-cols-12 gap-y-6 border-t border-mist pt-16 lg:gap-x-10"
+            data-reveal
+          >
             <div className="col-span-12 lg:col-span-4">
               <Eyebrow>03</Eyebrow>
-              <h2 id="outcome-title" className="mt-4 text-3xl font-semibold tracking-[-0.03em]">The outcome</h2>
+              <h2 id="outcome-title" className="mt-4 text-3xl font-semibold tracking-[-0.03em]">
+                The outcome
+              </h2>
             </div>
             <ul className="col-span-12 grid grid-cols-1 gap-px bg-mist sm:grid-cols-3 lg:col-span-8">
               {c.outcome.map((o) => (

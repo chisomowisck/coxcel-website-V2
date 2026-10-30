@@ -5,11 +5,24 @@ import { join, extname, relative } from "node:path";
 
 const root = process.cwd();
 const targets = ["src", "public/site.webmanifest", "mdx-components.tsx"];
-const extensions = new Set([".ts", ".tsx", ".js", ".mjs", ".css", ".md", ".mdx", ".json", ".webmanifest"]);
+const extensions = new Set([
+  ".ts",
+  ".tsx",
+  ".js",
+  ".mjs",
+  ".css",
+  ".md",
+  ".mdx",
+  ".json",
+  ".webmanifest",
+]);
 
 const rules = [
   { name: "gradient keyword", pattern: /gradient/i },
-  { name: "Tailwind gradient utility", pattern: /\bbg-(linear|radial|conic)\b|\bbg-(linear|radial|conic)-/ },
+  {
+    name: "Tailwind gradient utility",
+    pattern: /\bbg-(linear|radial|conic)\b|\bbg-(linear|radial|conic)-/,
+  },
   {
     name: "gradient stop utility",
     pattern: /(?<![\w-])(from|via|to)-(brand|ink|mist|white|black|transparent)(-\d{2,3})?(?![\w-])/,
@@ -40,7 +53,9 @@ for (const file of files) {
   lines.forEach((line, index) => {
     for (const rule of rules) {
       if (rule.pattern.test(line)) {
-        problems.push(`${relative(root, file)}:${index + 1}  ${rule.name}: ${line.trim().slice(0, 120)}`);
+        problems.push(
+          `${relative(root, file)}:${index + 1}  ${rule.name}: ${line.trim().slice(0, 120)}`,
+        );
       }
     }
   });

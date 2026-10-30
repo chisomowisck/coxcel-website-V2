@@ -4,7 +4,11 @@ import { serviceSlugs } from "@/content/services";
 
 /** Shared by the browser form and the server action, so both validate identically. */
 export const contactSchema = z.object({
-  name: z.string().trim().min(2, "Please enter your name.").max(100, "Please keep your name under 100 characters."),
+  name: z
+    .string()
+    .trim()
+    .min(2, "Please enter your name.")
+    .max(100, "Please keep your name under 100 characters."),
   email: z
     .string()
     .trim()
@@ -17,7 +21,12 @@ export const contactSchema = z.object({
     .regex(/^[0-9 +()-]*$/, "Please use digits, spaces and + ( ) - only.")
     .optional()
     .or(z.literal("")),
-  company: z.string().trim().max(120, "Please keep the company name under 120 characters.").optional().or(z.literal("")),
+  company: z
+    .string()
+    .trim()
+    .max(120, "Please keep the company name under 120 characters.")
+    .optional()
+    .or(z.literal("")),
   service: z.enum(["other", ...serviceSlugs] as [string, ...string[]], {
     error: "Please choose a service, or Other.",
   }),

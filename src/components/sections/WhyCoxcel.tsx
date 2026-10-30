@@ -56,14 +56,18 @@ export function WhyCoxcel({ n }: { n?: number }) {
       {site.features.capabilityNumbers ? (
         <div className="mt-20 border-t border-mist-300 pt-10" data-reveal>
           <div className="flex items-center gap-3">
-            <p className="text-xs font-semibold tracking-[0.2em] text-ink-600 uppercase">At a glance</p>
+            <p className="text-xs font-semibold tracking-[0.2em] text-ink-600 uppercase">
+              At a glance
+            </p>
             <SampleBadge />
           </div>
           <dl className="mt-6 grid grid-cols-2 gap-y-8 lg:grid-cols-4">
             {capabilityNumbers.map((c) => (
               <div key={c.label} className="flex flex-col border-l border-mist-300 pl-5">
                 <dt className="text-sm text-ink-600">{c.label}</dt>
-                <dd className="order-first text-5xl font-semibold tracking-[-0.04em] text-ink">{c.value}</dd>
+                <dd className="order-first text-5xl font-semibold tracking-[-0.04em] text-ink">
+                  {c.value}
+                </dd>
               </div>
             ))}
           </dl>

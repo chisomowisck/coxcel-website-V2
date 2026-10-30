@@ -1,6 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
+import { render } from "@react-email/render";
 import { Resend } from "resend";
 import { site } from "@/config/site";
 import { getService } from "@/content/services";
@@ -20,7 +21,10 @@ const directEmailHint = `Please email us directly at ${site.email}.`;
  * Contact form Server Action. Accepts native FormData so the form also works without JavaScript.
  * See specs/001-company-website/contracts/contact-action.md.
  */
-export async function submitContact(_prev: ContactResult | null, formData: FormData): Promise<ContactResult> {
+export async function submitContact(
+  _prev: ContactResult | null,
+  formData: FormData,
+): Promise<ContactResult> {
   // 1. Validate
   const parsed = contactSchema.safeParse(formDataToInput(formData));
   if (!parsed.success) {
@@ -67,26 +71,29 @@ export async function submitContact(_prev: ContactResult | null, formData: FormD
 
   const to = process.env.CONTACT_TO_EMAIL || site.email;
   const from = process.env.CONTACT_FROM_EMAIL || "Coxcel <noreply@coxcel.com>";
-  const serviceLabel = data.service === "other" ? "Other" : (getService(data.service)?.title ?? data.service);
+  const serviceLabel =
+    data.service === "other" ? "Other" : (getService(data.service)?.title ?? data.service);
   const resend = new Resend(apiKey);
 
   // 5. Notify the team
   try {
+    const notification = ContactNotification({
+      name: data.name,
+      email: data.email,
+      phone: data.phone || undefined,
+      company: data.company || undefined,
+      serviceLabel,
+      budget: data.budget || undefined,
+      message: data.message,
+      submittedAt: new Date().toUTCString(),
+    });
     const { error } = await resend.emails.send({
       from,
       to: [to],
       replyTo: data.email,
       subject: `New enquiry: ${serviceLabel} from ${data.name}`,
-      react: ContactNotification({
-        name: data.name,
-        email: data.email,
-        phone: data.phone || undefined,
-        company: data.company || undefined,
-        serviceLabel,
-        budget: data.budget || undefined,
-        message: data.message,
-        submittedAt: new Date().toUTCString(),
-      }),
+      html: await render(notification),
+      text: await render(notification, { plainText: true }),
     });
     if (error) throw new Error(error.message);
   } catch (err) {
@@ -100,12 +107,18 @@ export async function submitContact(_prev: ContactResult | null, formData: FormD
 
   // 6. Confirm to the visitor (failure here does not fail the enquiry)
   try {
+    const confirmation = ContactConfirmation({
+      name: data.name,
+      serviceLabel,
+      message: data.message,
+    });
     const { error } = await resend.emails.send({
       from,
       to: [data.email],
       replyTo: to,
       subject: "We have received your enquiry",
-      react: ContactConfirmation({ name: data.name, serviceLabel, message: data.message }),
+      html: await render(confirmation),
+      text: await render(confirmation, { plainText: true }),
     });
     if (error) console.error("[contact] Confirmation failed:", error.message);
   } catch (err) {

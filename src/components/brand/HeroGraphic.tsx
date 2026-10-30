@@ -30,12 +30,22 @@ export function HeroGraphic({
       className={className}
       role={decorative ? undefined : "img"}
       aria-hidden={decorative ? true : undefined}
-      aria-label={decorative ? undefined : "The Coxcel mark assembling from isometric blocks, its arrow pointing upward"}
+      aria-label={
+        decorative
+          ? undefined
+          : "The Coxcel mark assembling from isometric blocks, its arrow pointing upward"
+      }
       focusable="false"
     >
       <g className={dark ? "stroke-ink-700" : "stroke-mist-300"} fill="none" strokeWidth="1">
         {lines.map((d, i) => (
-          <path key={d} d={d} pathLength={1} className="hero-line" style={{ ["--i" as string]: i }} />
+          <path
+            key={d}
+            d={d}
+            pathLength={1}
+            className="hero-line"
+            style={{ ["--i" as string]: i }}
+          />
         ))}
       </g>
 
@@ -48,7 +58,11 @@ export function HeroGraphic({
         />
       </g>
 
-      <g className={cn("fill-logo", dark ? "stroke-ink" : "stroke-white")} strokeWidth="3" strokeLinejoin="round">
+      <g
+        className={cn("fill-logo", dark ? "stroke-ink" : "stroke-white")}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      >
         {C_BLOCKS.map((d, i) => (
           <path key={d} d={d} className="hero-block" style={{ ["--i" as string]: i }} />
         ))}

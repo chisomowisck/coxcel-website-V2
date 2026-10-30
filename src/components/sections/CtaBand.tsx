@@ -19,7 +19,10 @@ export function CtaBand({
     <section aria-labelledby="cta-title" className="relative overflow-hidden bg-ink text-white">
       <Container className="relative grid grid-cols-12 items-center gap-y-10 py-20 lg:py-28">
         <div className="col-span-12 lg:col-span-8">
-          <h2 id="cta-title" className="text-4xl font-semibold tracking-[-0.03em] sm:text-5xl lg:text-6xl">
+          <h2
+            id="cta-title"
+            className="text-4xl font-semibold tracking-[-0.03em] sm:text-5xl lg:text-6xl"
+          >
             {title}
           </h2>
           <p className="mt-6 max-w-2xl text-lg text-ink-300">{text}</p>
@@ -27,7 +30,10 @@ export function CtaBand({
             <ButtonLink href={href} size="lg" variant="inverse">
               {label}
             </ButtonLink>
-            <a href={`mailto:${site.email}`} className="link-underline self-start text-lg font-medium text-brand-300 sm:self-auto">
+            <a
+              href={`mailto:${site.email}`}
+              className="link-underline self-start text-lg font-medium text-brand-300 sm:self-auto"
+            >
               {site.email}
             </a>
           </div>

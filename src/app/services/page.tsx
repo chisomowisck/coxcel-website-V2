@@ -49,18 +49,20 @@ export default function ServicesPage() {
           className={gi % 2 === 0 ? "bg-white py-20 lg:py-28" : "bg-mist-100 py-20 lg:py-28"}
         >
           <Container>
-            <div className="grid grid-cols-12 gap-x-6 gap-y-8" data-reveal>
+            <div className="grid grid-cols-12 gap-y-8 lg:gap-x-6" data-reveal>
               <div className="col-span-12 lg:col-span-4">
                 <span
                   aria-hidden="true"
-                  className="block text-[5rem] leading-none font-semibold tracking-[-0.06em] text-mist-300 lg:text-[7rem]"
-                >
-                  {pad(gi + 1)}
-                </span>
+                  data-num={pad(gi + 1)}
+                  className="block text-[5rem] leading-none font-semibold tracking-[-0.06em] text-mist-300 before:content-[attr(data-num)] lg:text-[7rem]"
+                />
               </div>
               <div className="col-span-12 lg:col-span-8">
                 <Eyebrow>{group.label}</Eyebrow>
-                <h2 id={`${group.id}-title`} className="mt-4 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
+                <h2
+                  id={`${group.id}-title`}
+                  className="mt-4 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl"
+                >
                   {group.title}
                 </h2>
                 <p className="mt-4 max-w-2xl text-lg text-ink-600">{group.summary}</p>

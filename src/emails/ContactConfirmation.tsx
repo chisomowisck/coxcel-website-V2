@@ -20,8 +20,9 @@ export function ContactConfirmation({
         Thank you, {firstName}.
       </Heading>
       <Text style={s.text}>
-        We have received your enquiry about <strong>{serviceLabel}</strong>. A member of the Coxcel team will
-        reply within one business day, usually with a few questions and a suggested next step.
+        We have received your enquiry about <strong>{serviceLabel}</strong>. A member of the Coxcel
+        team will reply within one business day, usually with a few questions and a suggested next
+        step.
       </Text>
       <Text style={s.text}>For reference, here is what you sent:</Text>
       <Text style={s.message}>{message}</Text>

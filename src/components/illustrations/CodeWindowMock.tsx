@@ -1,10 +1,48 @@
 import { cn } from "@/lib/utils";
 
 const lines: { indent: number; tokens: { t: string; c?: "k" | "s" | "f" | "m" }[] }[] = [
-  { indent: 0, tokens: [{ t: "export async function ", c: "k" }, { t: "bookAppointment", c: "f" }, { t: "(req) {" }] },
-  { indent: 1, tokens: [{ t: "const ", c: "k" }, { t: "slot = " }, { t: "await ", c: "k" }, { t: "schedule." }, { t: "reserve", c: "f" }, { t: "(req.slotId)" }] },
-  { indent: 1, tokens: [{ t: "if ", c: "k" }, { t: "(!slot) " }, { t: "return ", c: "k" }, { t: "conflict", c: "f" }, { t: "(" }, { t: '"Slot taken"', c: "s" }, { t: ")" }] },
-  { indent: 1, tokens: [{ t: "await ", c: "k" }, { t: "reminders." }, { t: "queue", c: "f" }, { t: "(slot, { channel: " }, { t: '"whatsapp"', c: "s" }, { t: " })" }] },
+  {
+    indent: 0,
+    tokens: [
+      { t: "export async function ", c: "k" },
+      { t: "bookAppointment", c: "f" },
+      { t: "(req) {" },
+    ],
+  },
+  {
+    indent: 1,
+    tokens: [
+      { t: "const ", c: "k" },
+      { t: "slot = " },
+      { t: "await ", c: "k" },
+      { t: "schedule." },
+      { t: "reserve", c: "f" },
+      { t: "(req.slotId)" },
+    ],
+  },
+  {
+    indent: 1,
+    tokens: [
+      { t: "if ", c: "k" },
+      { t: "(!slot) " },
+      { t: "return ", c: "k" },
+      { t: "conflict", c: "f" },
+      { t: "(" },
+      { t: '"Slot taken"', c: "s" },
+      { t: ")" },
+    ],
+  },
+  {
+    indent: 1,
+    tokens: [
+      { t: "await ", c: "k" },
+      { t: "reminders." },
+      { t: "queue", c: "f" },
+      { t: "(slot, { channel: " },
+      { t: '"whatsapp"', c: "s" },
+      { t: " })" },
+    ],
+  },
   { indent: 1, tokens: [{ t: "return ", c: "k" }, { t: "ok", c: "f" }, { t: "(slot)" }] },
   { indent: 0, tokens: [{ t: "}" }] },
   { indent: 0, tokens: [{ t: "// 24 tests passing", c: "m" }] },
@@ -18,7 +56,10 @@ export function CodeWindowMock({ className }: { className?: string }) {
     <div
       role="img"
       aria-label="Illustration of a code editor showing a booking function and passing tests"
-      className={cn("w-full overflow-hidden bg-ink-900 text-left font-mono text-[0.72rem] leading-6 text-ink-200 clip-corner-lg sm:text-[0.8rem]", className)}
+      className={cn(
+        "w-full overflow-hidden bg-ink-900 text-left font-mono text-[0.72rem] leading-6 text-ink-200 clip-corner-lg sm:text-[0.8rem]",
+        className,
+      )}
     >
       <div className="flex items-center gap-2 border-b border-ink-700 px-4 py-3 font-sans">
         <span className="size-2.5 bg-ink-600 clip-hex" />
@@ -29,7 +70,7 @@ export function CodeWindowMock({ className }: { className?: string }) {
       <div className="overflow-hidden px-4 py-4">
         {lines.map((line, i) => (
           <div key={i} className="flex whitespace-pre">
-            <span className="mr-4 w-4 shrink-0 text-right text-ink-500 select-none">{i + 1}</span>
+            <span className="mr-4 w-4 shrink-0 text-right text-ink-400 select-none">{i + 1}</span>
             <span style={{ paddingLeft: `${line.indent * 1.25}rem` }}>
               {line.tokens.map((tok, j) => (
                 <span key={j} className={tok.c ? colour[tok.c] : undefined}>

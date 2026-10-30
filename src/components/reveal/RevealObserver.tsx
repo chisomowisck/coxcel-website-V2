@@ -15,7 +15,9 @@ export function RevealObserver() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (!("IntersectionObserver" in window)) return;
 
-    const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]:not([data-revealed])"));
+    const elements = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-reveal]:not([data-revealed])"),
+    );
     const viewport = window.innerHeight;
     for (const el of elements) {
       if (el.getBoundingClientRect().top < viewport * 0.95) el.dataset.revealed = "";

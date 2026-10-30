@@ -8,13 +8,18 @@ import { CircleAlert, CircleCheck, LoaderCircle } from "lucide-react";
 import { submitContact } from "@/actions/contact";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/config/site";
-import { contactSchema, type ContactField, type ContactInput, type ContactResult } from "@/lib/contact-schema";
+import {
+  contactSchema,
+  type ContactField,
+  type ContactInput,
+  type ContactResult,
+} from "@/lib/contact-schema";
 import { cn } from "@/lib/utils";
 
 type Option = { value: string; label: string };
 
 const inputClass =
-  "mt-2 block w-full border border-mist-300 bg-white px-4 py-3 text-base text-ink placeholder:text-ink-400 transition-colors hover:border-ink-400 focus:border-brand focus:outline-2 focus:outline-offset-0 focus:outline-brand aria-[invalid=true]:border-ink aria-[invalid=true]:border-l-4";
+  "mt-2 block w-full border border-mist-300 bg-white px-4 py-3 text-base text-ink placeholder:text-ink-500 transition-colors hover:border-ink-400 focus:border-brand focus:outline-2 focus:outline-offset-0 focus:outline-brand aria-[invalid=true]:border-ink aria-[invalid=true]:border-l-4";
 
 const labelClass = "block text-sm font-medium text-ink";
 
@@ -22,14 +27,18 @@ const labelClass = "block text-sm font-medium text-ink";
  * Contact form. Validates in the browser with React Hook Form + Zod, then submits through a
  * Server Action that validates again. Without JavaScript the same form posts natively.
  */
-export function ContactForm({ serviceOptions, defaultService = "" }: { serviceOptions: Option[]; defaultService?: string }) {
-  const [state, formAction, pending] = useActionState<ContactResult | null, FormData>(submitContact, null);
+export function ContactForm({ serviceOptions }: { serviceOptions: Option[] }) {
+  const [state, formAction, pending] = useActionState<ContactResult | null, FormData>(
+    submitContact,
+    null,
+  );
   const statusRef = useRef<HTMLDivElement>(null);
 
   const {
     register,
     handleSubmit,
     setFocus,
+    setValue,
     reset,
     formState: { errors },
   } = useForm<ContactInput>({
@@ -41,7 +50,7 @@ export function ContactForm({ serviceOptions, defaultService = "" }: { serviceOp
       email: "",
       phone: "",
       company: "",
-      service: defaultService,
+      service: "",
       budget: "",
       message: "",
       website: "",
@@ -49,6 +58,14 @@ export function ContactForm({ serviceOptions, defaultService = "" }: { serviceOp
   });
 
   const serverErrors = state?.status === "error" ? state.fieldErrors : undefined;
+
+  // Preselect a service from links such as /contact?service=ai-integration.
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get("service");
+    if (requested && serviceOptions.some((o) => o.value === requested)) {
+      setValue("service", requested);
+    }
+  }, [serviceOptions, setValue]);
 
   useEffect(() => {
     if (!state) return;
@@ -86,7 +103,10 @@ export function ContactForm({ serviceOptions, defaultService = "" }: { serviceOp
     const error = errorFor(field);
     if (!error) return null;
     return (
-      <p id={`contact-${field}-error`} className="mt-2 flex items-start gap-1.5 text-sm font-medium text-ink">
+      <p
+        id={`contact-${field}-error`}
+        className="mt-2 flex items-start gap-1.5 text-sm font-medium text-ink"
+      >
         <CircleAlert aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
         {error}
       </p>
@@ -95,13 +115,23 @@ export function ContactForm({ serviceOptions, defaultService = "" }: { serviceOp
 
   if (state?.status === "success") {
     return (
-      <div ref={statusRef} tabIndex={-1} role="status" className="border-l-4 border-brand bg-mist-100 p-8 focus:outline-none">
+      <div
+        ref={statusRef}
+        tabIndex={-1}
+        role="status"
+        className="border-l-4 border-brand bg-mist-100 p-8 focus:outline-none"
+      >
         <CircleCheck aria-hidden="true" className="size-8 text-brand-700" />
-        <h2 className="mt-4 text-2xl font-semibold tracking-tight">Thank you. Your message is on its way.</h2>
+        <h2 className="mt-4 text-2xl font-semibold tracking-tight">
+          Thank you. Your message is on its way.
+        </h2>
         <p className="mt-3 text-ink-600">
-          We have sent a confirmation to your inbox and will reply within one business day. If it does not arrive, check
-          your spam folder or write to{" "}
-          <a href={`mailto:${site.email}`} className="font-medium text-brand-700 underline underline-offset-4">
+          We have sent a confirmation to your inbox and will reply within one business day. If it
+          does not arrive, check your spam folder or write to{" "}
+          <a
+            href={`mailto:${site.email}`}
+            className="font-medium text-brand-700 underline underline-offset-4"
+          >
             {site.email}
           </a>
           .
@@ -111,7 +141,13 @@ export function ContactForm({ serviceOptions, defaultService = "" }: { serviceOp
   }
 
   return (
-    <form action={formAction} onSubmit={onSubmit} noValidate className="space-y-6" aria-describedby="contact-required-note">
+    <form
+      action={formAction}
+      onSubmit={onSubmit}
+      noValidate
+      className="space-y-6"
+      aria-describedby="contact-required-note"
+    >
       <p id="contact-required-note" className="text-sm text-ink-600">
         Fields marked <span aria-hidden="true">*</span>
         <span className="sr-only">required</span> are required.
@@ -122,7 +158,11 @@ export function ContactForm({ serviceOptions, defaultService = "" }: { serviceOp
         tabIndex={-1}
         role="alert"
         aria-live="assertive"
-        className={cn(state?.status === "error" ? "flex gap-3 border-l-4 border-ink bg-mist-100 p-4 focus:outline-none" : "sr-only")}
+        className={cn(
+          state?.status === "error"
+            ? "flex gap-3 border-l-4 border-ink bg-mist-100 p-4 focus:outline-none"
+            : "sr-only",
+        )}
       >
         {state?.status === "error" ? (
           <>
@@ -135,7 +175,13 @@ export function ContactForm({ serviceOptions, defaultService = "" }: { serviceOp
       {/* Honeypot: hidden from people and assistive technology. */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
         <label htmlFor="contact-website">Website</label>
-        <input id="contact-website" type="text" tabIndex={-1} autoComplete="off" {...register("website")} />
+        <input
+          id="contact-website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          {...register("website")}
+        />
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -143,35 +189,66 @@ export function ContactForm({ serviceOptions, defaultService = "" }: { serviceOp
           <label htmlFor="contact-name" className={labelClass}>
             Name <span aria-hidden="true">*</span>
           </label>
-          <input type="text" autoComplete="name" required className={inputClass} {...fieldProps("name")} {...register("name")} />
+          <input
+            type="text"
+            autoComplete="name"
+            required
+            className={inputClass}
+            {...fieldProps("name")}
+            {...register("name")}
+          />
           {fieldError("name")}
         </div>
         <div>
           <label htmlFor="contact-email" className={labelClass}>
             Email <span aria-hidden="true">*</span>
           </label>
-          <input type="email" autoComplete="email" required className={inputClass} {...fieldProps("email")} {...register("email")} />
+          <input
+            type="email"
+            autoComplete="email"
+            required
+            className={inputClass}
+            {...fieldProps("email")}
+            {...register("email")}
+          />
           {fieldError("email")}
         </div>
         <div>
           <label htmlFor="contact-phone" className={labelClass}>
             Phone <span className="font-normal text-ink-600">(optional)</span>
           </label>
-          <input type="tel" autoComplete="tel" className={inputClass} {...fieldProps("phone")} {...register("phone")} />
+          <input
+            type="tel"
+            autoComplete="tel"
+            className={inputClass}
+            {...fieldProps("phone")}
+            {...register("phone")}
+          />
           {fieldError("phone")}
         </div>
         <div>
           <label htmlFor="contact-company" className={labelClass}>
             Company <span className="font-normal text-ink-600">(optional)</span>
           </label>
-          <input type="text" autoComplete="organization" className={inputClass} {...fieldProps("company")} {...register("company")} />
+          <input
+            type="text"
+            autoComplete="organization"
+            className={inputClass}
+            {...fieldProps("company")}
+            {...register("company")}
+          />
           {fieldError("company")}
         </div>
         <div>
           <label htmlFor="contact-service" className={labelClass}>
             Service of interest <span aria-hidden="true">*</span>
           </label>
-          <select required className={cn(inputClass, "appearance-auto")} {...fieldProps("service")} {...register("service")}>
+          <select
+            required
+            className={cn(inputClass, "appearance-auto")}
+            {...fieldProps("service")}
+            {...register("service")}
+          >
             <option value="">Choose a service</option>
             {serviceOptions.map((o) => (
               <option key={o.value} value={o.value}>
@@ -185,7 +262,11 @@ export function ContactForm({ serviceOptions, defaultService = "" }: { serviceOp
           <label htmlFor="contact-budget" className={labelClass}>
             Budget range <span className="font-normal text-ink-600">(optional)</span>
           </label>
-          <select className={cn(inputClass, "appearance-auto")} {...fieldProps("budget")} {...register("budget")}>
+          <select
+            className={cn(inputClass, "appearance-auto")}
+            {...fieldProps("budget")}
+            {...register("budget")}
+          >
             <option value="">Prefer not to say</option>
             {site.budgetRanges.map((b) => (
               <option key={b} value={b}>
@@ -223,7 +304,10 @@ export function ContactForm({ serviceOptions, defaultService = "" }: { serviceOp
           />
           <label htmlFor="contact-consent" className="text-[0.95rem] text-ink-700">
             I agree that Coxcel may use these details to respond to my enquiry, as described in the{" "}
-            <Link href="/legal/privacy" className="font-medium text-brand-700 underline underline-offset-4">
+            <Link
+              href="/legal/privacy"
+              className="font-medium text-brand-700 underline underline-offset-4"
+            >
               Privacy Policy
             </Link>
             . <span aria-hidden="true">*</span>
@@ -236,7 +320,10 @@ export function ContactForm({ serviceOptions, defaultService = "" }: { serviceOp
         <Button type="submit" size="lg" disabled={pending} arrow={!pending} aria-disabled={pending}>
           {pending ? (
             <>
-              <LoaderCircle aria-hidden="true" className="size-5 animate-spin motion-reduce:animate-none" />
+              <LoaderCircle
+                aria-hidden="true"
+                className="size-5 animate-spin motion-reduce:animate-none"
+              />
               Sending
             </>
           ) : (

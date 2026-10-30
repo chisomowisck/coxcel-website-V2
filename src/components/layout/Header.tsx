@@ -19,9 +19,11 @@ export function Header() {
           </ul>
         </nav>
         <div className="flex items-center gap-2">
-          <ButtonLink href="/contact" className="hidden sm:inline-flex" size="md">
-            Start a project
-          </ButtonLink>
+          <div className="hidden sm:block">
+            <ButtonLink href="/contact" size="md">
+              Start a project
+            </ButtonLink>
+          </div>
           <MobileNav menu={serviceMenu} />
         </div>
       </div>

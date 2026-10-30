@@ -10,7 +10,8 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Careers",
-  description: "Join Coxcel. We welcome open applications from engineers, data specialists, designers and digital marketers.",
+  description:
+    "Join Coxcel. We welcome open applications from engineers, data specialists, designers and digital marketers.",
   path: "/careers",
 });
 
@@ -44,7 +45,12 @@ export default function CareersPage() {
       </PageHeader>
 
       <Section labelledBy="values-title">
-        <SectionIntro n={1} id="values-title" eyebrow="What we value" title="The way we work together." />
+        <SectionIntro
+          n={1}
+          id="values-title"
+          eyebrow="What we value"
+          title="The way we work together."
+        />
         <ul className="mt-14 grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2">
           {values.map((v) => (
             <li key={v.title} className="border-t border-ink pt-6" data-reveal>
@@ -83,8 +89,9 @@ export default function CareersPage() {
             <a href={applyHref} className="link-underline font-medium text-brand-300">
               {site.email}
             </a>{" "}
-            with the subject &ldquo;Open application&rdquo;. Include your CV or portfolio, the kind of work you want to do,
-            and where you are based. We read every application and reply to all of them.
+            with the subject &ldquo;Open application&rdquo;. Include your CV or portfolio, the kind
+            of work you want to do, and where you are based. We read every application and reply to
+            all of them.
           </p>
           <div className="mt-10">
             <ButtonLink href={applyHref} size="lg" variant="inverse">

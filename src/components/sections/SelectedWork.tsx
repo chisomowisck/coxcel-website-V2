@@ -18,9 +18,13 @@ export function SelectedWork({ n }: { n?: number }) {
         eyebrow="Selected work"
         title="Representative projects, explained plainly."
         intro="Each project starts with a business problem and ends with something people use every day."
-        aside={<TextLink href="/work" arrow>All work</TextLink>}
+        aside={
+          <TextLink href="/work" arrow>
+            All work
+          </TextLink>
+        }
       />
-      <div className="mt-16 grid grid-cols-12 gap-x-6 gap-y-14">
+      <div className="mt-16 grid grid-cols-12 gap-y-14 lg:gap-x-6">
         {[first, second].map((c, i) => (
           <article
             key={c.slug}
@@ -28,14 +32,16 @@ export function SelectedWork({ n }: { n?: number }) {
             className={i === 0 ? "col-span-12 lg:col-span-7" : "col-span-12 lg:col-span-5 lg:mt-24"}
           >
             <Link href={`/work/${c.slug}`} className="group block">
-              <div className="bg-mist-100 p-6 transition-transform duration-300 group-hover:-translate-y-1 sm:p-10 motion-reduce:transition-none">
+              <div className="bg-mist-100 p-6 transition-transform duration-300 group-hover:-translate-y-1 motion-reduce:transition-none sm:p-10">
                 <CaseVisual visual={c.visual} />
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-ink-600">
                 <span>{c.sector}</span>
                 {c.sample ? <SampleBadge /> : null}
               </div>
-              <h3 className="mt-3 text-2xl font-semibold tracking-tight group-hover:text-brand-700">{c.title}</h3>
+              <h3 className="mt-3 text-2xl font-semibold tracking-tight group-hover:text-brand-700">
+                {c.title}
+              </h3>
               <p className="mt-3 text-ink-600">{c.summary}</p>
             </Link>
           </article>

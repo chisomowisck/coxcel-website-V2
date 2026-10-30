@@ -3,7 +3,13 @@
  * SAMPLE: replace before launch. Hidden by default (site.features.testimonials / clientLogos).
  * Only publish real quotes and logos with written permission.
  */
-export type Testimonial = { quote: string; name: string; role: string; company: string; sample: boolean };
+export type Testimonial = {
+  quote: string;
+  name: string;
+  role: string;
+  company: string;
+  sample: boolean;
+};
 
 export const testimonials: Testimonial[] = [
   // SAMPLE: replace before launch
