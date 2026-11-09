@@ -2,6 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ConsentManager } from "@/components/consent/ConsentManager";
+import {
+  GoogleTagManagerHead,
+  GoogleTagManagerNoScript,
+} from "@/components/consent/GoogleTagManager";
 import { Defingerprint } from "@/components/layout/Defingerprint";
 import { Footer } from "@/components/layout/Footer";
 import { getAnalyticsConfig, googleSiteVerification, hasAnyTracker } from "@/config/analytics";
@@ -64,7 +68,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   const analytics = getAnalyticsConfig();
   return (
     <html lang="en-GB" className={poppins.variable}>
+      <head>{analytics.gtmId ? <GoogleTagManagerHead gtmId={analytics.gtmId} /> : null}</head>
       <body className="flex min-h-dvh flex-col">
+        {analytics.gtmId ? <GoogleTagManagerNoScript gtmId={analytics.gtmId} /> : null}
         <SkipLink />
         <Header />
         <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">

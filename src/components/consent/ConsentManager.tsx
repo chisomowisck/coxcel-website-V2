@@ -9,6 +9,7 @@ import {
   subscribeOpenSettings,
   writeConsent,
 } from "./consent-store";
+import { updateGoogleConsent } from "./GoogleTagManager";
 import { Trackers } from "./Trackers";
 
 /**
@@ -31,6 +32,7 @@ export function ConsentManager({ config }: { config: AnalyticsConfig }) {
   const choose = (choice: "granted" | "denied") => {
     const wasGranted = consent === "granted";
     writeConsent(choice);
+    updateGoogleConsent(choice);
     setReopened(false);
     // Tags that already ran cannot be unloaded; a reload clears them.
     if (wasGranted && choice === "denied") window.location.reload();

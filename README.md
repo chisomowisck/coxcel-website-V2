@@ -57,7 +57,10 @@ redeploy after changing them.
 | `SMART_LOOK_TRACKING_CODE` | project key       | Smartlook                                            |
 | `SMART_LOOK_REGION`        | `eu` or `us`      | Smartlook data region (default `eu`)                 |
 
-When any tag is set, a cookie banner appears and **no tag loads until the visitor accepts**. A
+When any tag is set, a cookie banner appears. Google Tag Manager loads on every page from the HTML
+head with Google Consent Mode v2: consent starts as denied (no cookies), and "Accept cookies" switches
+it to granted. In GTM, turn on consent checks for your tags so they respect this. Every other tag
+(GA, pixels, Clarity, Smartlook) **loads only after the visitor accepts**. A
 "Cookie settings" link in the footer lets visitors change their choice, and the Cookie notice lists
 only the tools that are switched on. If you use GTM to fire GA or the pixels, set only `GOOGLE_GTM`
 to avoid counting visits twice. Code: `src/config/analytics.ts`, `src/components/consent/`.

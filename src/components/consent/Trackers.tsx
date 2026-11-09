@@ -10,9 +10,12 @@ type TrackerWindow = Window & {
   twq?: (...args: unknown[]) => void;
 };
 
-/** Third-party tags. Rendered only after the visitor accepts cookies. */
+/**
+ * Third-party tags other than Google Tag Manager. Rendered only after the visitor accepts cookies.
+ * GTM is always loaded from the page head with Consent Mode (see GoogleTagManager.tsx).
+ */
 export function Trackers({ config }: { config: AnalyticsConfig }) {
-  const { gtmId, gaId, fbPixelId, twPixelId, clarityId, smartlook } = config;
+  const { gaId, fbPixelId, twPixelId, clarityId, smartlook } = config;
   const pathname = usePathname();
   const first = useRef(true);
 
@@ -29,12 +32,6 @@ export function Trackers({ config }: { config: AnalyticsConfig }) {
 
   return (
     <>
-      {gtmId ? (
-        <Script id="gtm" strategy="afterInteractive">
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',${JSON.stringify(gtmId)});`}
-        </Script>
-      ) : null}
-
       {gaId ? (
         <>
           <Script

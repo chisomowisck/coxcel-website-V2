@@ -17,11 +17,18 @@ const clean = (v: string | undefined) => {
   return t ? t : undefined;
 };
 
+/** Accepts a bare ID or a pasted snippet, and returns just the ID that matches `pattern`. */
+const pick = (v: string | undefined, pattern: RegExp) => {
+  const t = clean(v);
+  if (!t) return undefined;
+  return t.match(pattern)?.[0] ?? undefined;
+};
+
 export function getAnalyticsConfig(): AnalyticsConfig {
   const smartlookKey = clean(process.env.SMART_LOOK_TRACKING_CODE);
   return {
-    gtmId: clean(process.env.GOOGLE_GTM),
-    gaId: clean(process.env.GA_TRACKING_ID),
+    gtmId: pick(process.env.GOOGLE_GTM, /GTM-[A-Z0-9]+/i)?.toUpperCase(),
+    gaId: pick(process.env.GA_TRACKING_ID, /G-[A-Z0-9]+/i)?.toUpperCase(),
     fbPixelId: clean(process.env.FB_PIXEL_ID),
     twPixelId: clean(process.env.TW_PIXEL_ID),
     clarityId: clean(process.env.CLARITY_PROJECT_ID),

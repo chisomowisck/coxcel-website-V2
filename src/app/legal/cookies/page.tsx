@@ -17,7 +17,8 @@ export default function CookiesPage() {
     a.gtmId && {
       name: "Google Tag Manager",
       provider: "Google",
-      purpose: "Loads and manages our measurement tags.",
+      purpose:
+        "Loads and manages our measurement tags. It runs in a cookieless mode until you accept.",
     },
     a.gaId && {
       name: "Google Analytics",
@@ -57,7 +58,8 @@ export default function CookiesPage() {
       <p>
         The site works fully without optional cookies. Analytics and marketing cookies are only set
         if you choose &ldquo;Accept cookies&rdquo; in the cookie banner. If you choose
-        &ldquo;Reject&rdquo;, none of the tools below are loaded.
+        &ldquo;Reject&rdquo;, no analytics or marketing cookies are set. Google Tag Manager still
+        loads, but in a cookieless mode that respects your choice.
       </p>
 
       <h2>Essential storage</h2>
